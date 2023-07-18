@@ -1,0 +1,12 @@
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\bin\Debug\net6.0\BD.deps.json
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\bin\Debug\net6.0\BD.dll
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\bin\Debug\net6.0\BD.pdb
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\obj\Debug\net6.0\BD.csproj.AssemblyReference.cache
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\obj\Debug\net6.0\BD.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\obj\Debug\net6.0\BD.AssemblyInfoInputs.cache
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\obj\Debug\net6.0\BD.AssemblyInfo.cs
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\obj\Debug\net6.0\BD.csproj.CoreCompileInputs.cache
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\obj\Debug\net6.0\BD.dll
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\obj\Debug\net6.0\refint\BD.dll
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\obj\Debug\net6.0\BD.pdb
+C:\Users\wagne\source\repos\Js-Vanilla-ASP-NET-Core-WebAPI-main\api\Cursos\BD\BD\obj\Debug\net6.0\ref\BD.dll
