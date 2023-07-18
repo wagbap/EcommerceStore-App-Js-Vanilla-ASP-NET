@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cRGjDe2jDkxkvfsXJFIW2cW1pMSy7CREIPrt5oxcsaQszA1szXe7Admz/Z/GAEml7a/PmqdimjOEROCEiuLg2Q==",
+  "dgSpecHash": "9RuT/Qmd6ouVB2qtgHDZi4LlBHQrtJJSobVC7cI4wmsaNT1lD98yEsMBB+w04LnOwFxKGJbtR16Y/58bK/qTCA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI-main\\api\\Cursos\\Cursos\\Cursos.csproj",
+  "projectFilePath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wagne\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\wagne\\.nuget\\packages\\microsoft.visualbasic\\10.3.0\\microsoft.visualbasic.10.3.0.nupkg.sha512",

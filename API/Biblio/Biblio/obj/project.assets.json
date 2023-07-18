@@ -513,11 +513,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI-main\\api\\Cursos\\Biblio\\Biblio\\Biblio.csproj",
+      "projectUniqueName": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\Biblio.csproj",
       "projectName": "Biblio",
-      "projectPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI-main\\api\\Cursos\\Biblio\\Biblio\\Biblio.csproj",
+      "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\Biblio.csproj",
       "packagesPath": "C:\\Users\\wagne\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI-main\\api\\Cursos\\Biblio\\Biblio\\obj\\",
+      "outputPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\wagne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -534,11 +534,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI-main\\api\\Cursos\\BD\\BD\\BD.csproj": {
-              "projectPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI-main\\api\\Cursos\\BD\\BD\\BD.csproj"
+            "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\BD\\BD\\BD.csproj": {
+              "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\BD\\BD\\BD.csproj"
             },
-            "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI-main\\api\\Cursos\\Utilis\\Utilis\\Utilis.csproj": {
-              "projectPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI-main\\api\\Cursos\\Utilis\\Utilis\\Utilis.csproj"
+            "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj": {
+              "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj"
             }
           }
         }

@@ -41,7 +41,7 @@ app.MapPost("/login", async (HttpContext context) =>
 
     if (isAuthenticated)
     {
-        await context.Response.WriteAsync("Login Successful");
+        await context.Response.WriteAsync("Login Successful wag");
 
 
         // Faça algo com o DataSet, se necessário
