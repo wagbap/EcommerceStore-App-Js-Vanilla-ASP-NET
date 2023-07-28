@@ -14,10 +14,7 @@ async function iniData() {
     verificarAtivoCardInfo();
 }
 
-
-
 /* ---------------------------- */
-
 /* APIs */
 
 async function getAPI(url, data = null) {
@@ -41,8 +38,6 @@ async function getAPI(url, data = null) {
         return []; // Retorna uma resposta vazia em caso de erro
     }
 }
-
-
 
 async function postAPI(url, objData) {
     const response = await fetch("https://localhost:44332/" + url, {
@@ -241,9 +236,9 @@ async function printCart() {
             // Use the 'matchingData' object to display the cart item
             cartItem += `
             <tr id="${matchingData.ISBN}">
-                <td><img width="80px" src=${matchingData.FotoCapa} alt="Product Image" class="product-image"></td>
-                <td>${matchingData.titulo}</td>
-                <td>${matchingData.preco.toString()}€</td>
+                <td><img width="80px" src="img/${matchingData.FotoCapa}" alt="Product Image" class="product-image"></td>
+                <td>${matchingData.Curso}</td>
+                <td>${matchingData.Preço.toString()}€</td>
                 <td >
                     <a class="remove-product" onclick="addToCart(${matchingData.ISBN}, 'decrementar')">- </a>
                     <span class="quantity">${cart.Quantidade}</span>
@@ -258,38 +253,39 @@ async function printCart() {
 }
 
 async function addToCart(isbn, tipo = null) {
-    let cart = await getCart();
-    let matchingCartIndex = cart.findIndex((cartItem) => cartItem.ISBN === isbn);
-    let gUser = getUserId();
-    if (gUser === null) return alert("Não está logado");
+  let cart = await getCart();
+  let matchingCartIndex = cart.findIndex((cartItem) => cartItem.ISBN === isbn);
+  let gUser = getUserId();
+  if (gUser === null) return alert("Não está logado");
 
-    let cartItem = {
-        UserID: gUser.toString(),
-        ISBN: isbn.toString(),
-        Quantidade: 1, // Define o valor padrão da quantidade como 1
-        Total: 0
-    };
+  let cartItem = {
+      UserID: gUser.toString(),
+      ISBN: isbn.toString(),
+      Quantidade: 1, // Define o valor padrão da quantidade como 1
+      Total: 0
+  };
 
-    if (matchingCartIndex !== -1) {
-        if (tipo === "incrementar") {
-            cartItem.Quantidade = cart[matchingCartIndex].Quantidade + 1;
-        } else if (tipo === "decrementar") {
-            cartItem.Quantidade = cart[matchingCartIndex].Quantidade - 1;
-        }else if (tipo === "new") {
-            cartItem.Quantidade = cart[matchingCartIndex].Quantidade + 1;
-        }else if (tipo === "incrementar" && cart[matchingCartIndex].Quantidade === 0 || tipo === "decrementar" && cart[matchingCartIndex].Quantidade === 0) {
-            removellFromCart(isbn);
-        }
-    } else {
-        // O item não existe no carrinho, adicione-o com quantidade 1
-        cart.push(cartItem);
-    }
+  if (matchingCartIndex !== -1) {
+      if (tipo === "incrementar") {
+          cartItem.Quantidade = cart[matchingCartIndex].Quantidade + 1;
+      } else if (tipo === "decrementar") {
+          cartItem.Quantidade = cart[matchingCartIndex].Quantidade - 1;
+      }else if (tipo === "new") {
+          cartItem.Quantidade = cart[matchingCartIndex].Quantidade + 1;
+      }else if (tipo === "incrementar" && cart[matchingCartIndex].Quantidade === 0 || tipo === "decrementar" && cart[matchingCartIndex].Quantidade === 0) {
+          removellFromCart(isbn);
+      }
+  } else {
+      // O item não existe no carrinho, adicione-o com quantidade 1
+      cart.push(cartItem);
+  }
 
-    await postAPI("SetCarinho", cartItem);
+  await postAPI("SetCarinho", cartItem);
 
-    // Atualize a exibição do carrinho
-    printCart();
+  // Atualize a exibição do carrinho
+  printCart();
 }
+
 
 
 async function removellFromCart(isbn) {

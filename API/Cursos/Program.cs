@@ -36,6 +36,9 @@ var app = builder.Build();
 app.UseCors("MyCorsProfile");
 
 // Configure o pipeline de solicitação HTTP.
+
+
+
 app.MapPost("/Login", (Prm_Login prmIn) =>
 {
     return Gateway.ExecuteLogin(prmIn);
@@ -309,12 +312,6 @@ public class Favoritos
 }
 
 
-public class ParmsLogin
-{
-    public string User { get; set; }
-    public string Password { get; set; }
-}
-
 
 public class Carinho
 {
@@ -322,4 +319,11 @@ public class Carinho
     public string ISBN { get; set; }
     public int Quantidade { get; set; }
     public int Total { get; set; }
+}
+
+
+public class LoginDT
+{
+    public string User { get; set; }
+    public string Password { get; set; }
 }
