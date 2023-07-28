@@ -15,8 +15,8 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     let userLogin = document.getElementById("username").value;
     let pwd = document.getElementById("password").value;
     let user = {
-      userLogin: userLogin,
-      pwd: pwd
+      User: userLogin,
+      Password: pwd
     };
   
     // Fazer a chamada à API e obter o resultado

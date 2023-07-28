@@ -21,7 +21,7 @@ async function iniData() {
 /* APIs */
 
 async function getAPI(url, data = null) {
-    let apiUrl = "http://localhost:44332/" + url;
+    let apiUrl = "https://localhost:44332/" + url;
     
     if (data !== null) {
         apiUrl += data;
@@ -45,7 +45,7 @@ async function getAPI(url, data = null) {
 
 
 async function postAPI(url, objData) {
-    const response = await fetch("http://localhost:44332/" + url, {
+    const response = await fetch("https://localhost:44332/" + url, {
         method: 'POST',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },

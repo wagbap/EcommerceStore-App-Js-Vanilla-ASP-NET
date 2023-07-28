@@ -670,8 +670,7 @@
       "Biblio >= 1.0.0",
       "Microsoft.VisualBasic >= 10.3.0",
       "Newtonsoft.Json >= 13.0.3",
-      "System.Data.SqlClient >= 4.8.5",
-      "Utilis >= 1.0.0"
+      "System.Data.SqlClient >= 4.8.5"
     ]
   },
   "packageFolders": {
@@ -704,9 +703,6 @@
           "projectReferences": {
             "C:\\Users\\wagne\\source\\repos\\Biblio\\Biblio\\Biblio.csproj": {
               "projectPath": "C:\\Users\\wagne\\source\\repos\\Biblio\\Biblio\\Biblio.csproj"
-            },
-            "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj": {
-              "projectPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj"
             }
           }
         }

@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Biblio\Biblio\Biblio.csproj" />
-    <ProjectReference Include="..\Utilis\Utilis\Utilis.csproj" />
   </ItemGroup>
 
 </Project>

@@ -11,8 +11,7 @@
           "Biblio": "1.0.0",
           "Microsoft.VisualBasic": "10.3.0",
           "Newtonsoft.Json": "13.0.3",
-          "System.Data.SqlClient": "4.8.5",
-          "Utilis": "1.0.0"
+          "System.Data.SqlClient": "4.8.5"
         },
         "runtime": {
           "Cursos.dll": {}
@@ -131,6 +130,15 @@
         "runtime": {
           "Biblio.dll": {}
         }
+      },
+      "Utilis/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.Data.SqlClient": "4.8.5"
+        },
+        "runtime": {
+          "Utilis.dll": {}
+        }
       }
     }
   },
@@ -230,6 +238,11 @@
       "sha512": ""
     },
     "Biblio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Utilis/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
