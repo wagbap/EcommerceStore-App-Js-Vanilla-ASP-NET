@@ -19,8 +19,9 @@ async function iniData() {
 /* ---------------------------- */
 
 /* APIs */
+
 async function getAPI(url, data = null) {
-    let apiUrl = "https://localhost:44332/" + url;
+    let apiUrl = "http://localhost:44332/" + url;
     
     if (data !== null) {
         apiUrl += data;
@@ -44,7 +45,7 @@ async function getAPI(url, data = null) {
 
 
 async function postAPI(url, objData) {
-    const response = await fetch("https://localhost:44332/" + url, {
+    const response = await fetch("http://localhost:44332/" + url, {
         method: 'POST',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
@@ -134,87 +135,6 @@ async function printData() {
        `;
   });
 
-}
-
-
-async function addToCard(key) {
-
-  
-  if (listCards[key] == null) {
-    // copy product form list to list card
-    listCards[key] = JSON.parse(JSON.stringify(products[key]));
-    listCards[key].quantity = 1;
-  }
-
-
-  reloadCard();
-
-}
-
-
-function reloadCard() {
-  listCard.innerHTML = '';
-  let count = 0;
-  let totalPrice = 0;
-  listCards.forEach((course, key) => {
-    totalPrice = totalPrice + course.Preço;
-    count = count + course.quantity;
-    if (course != null) {
-      let newDiv = document.createElement('tr');
-      newDiv.innerHTML = `
-                        <tr>
-                        <td><img style="width:150px;heigth:150px;" src="img/${course.FotoCapa}" ></td>
-                        <td >${course.Curso}</td>
-                        <td>${course.Preço.toLocaleString()}€</td>
-                            <td><button  onclick="changeQuantity(${key}, ${course.quantity - 1})">-</div></td>
-                            <td>  <div class="count">${course.quantity}</div></td>
-                            <td>   <button onclick="changeQuantity(${key}, ${course.quantity + 1})">+</button></td>
-                        </tr>`;
-      listCard.appendChild(newDiv);
-    }
-  })
-  total.innerText = totalPrice.toLocaleString();
-  quantity.innerText = count;
-}
-async function changeQuantity(key, quantity) {
-  const userId = localStorage.getItem('userID');
-
-  if (!userId) {
-    alert("User not logged in. Please login to change quantity.");
-    return openRegisterForm();
-  }
-
-  if (quantity == 0) {
-    delete listCards[key];
-  } else {
-    listCards[key].quantity = quantity;
-    listCards[key].Preço = quantity * products[key].Preço;
-  }
-
-  // Create cart item data
-  const cartItemData = {
-    Curso_ISBN: listCards[key].ISBN,
-    Cliente_id: userId,
-    Quantidade: listCards[key].quantity,
-  };
-
-  try {
-    const response = await fetch('https://localhost:44332/GetCarinho', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(cartItemData),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    } else {
-      alert('Cart updated successfully!');
-    }
-  } catch (error) {
-    console.log(error);
-  }
-
-  reloadCard();
 }
 
 /* FILTRO  */

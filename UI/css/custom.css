@@ -159,12 +159,12 @@ ul {
 .card h4 {
     margin-bottom: 5px;
 }
-.info-card .promocao {
-    text-decoration: none;
+.info-card .preco {
+    text-decoration: line-through;
     font-size: 18px;
     margin-top: 10px;
 }
-.info-card .promocao span {
+.info-card .preco span {
     font-weight: 700;
     font-size: 22px;
 }
@@ -225,4 +225,331 @@ text-decoration: none;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: all 0.3s;
+}
+
+
+#buscador {
+    color: black !important;
+}
+
+#imgCart{
+  width: 150px;
+}
+
+.button-danger{
+    background-color: red !important;
+    color: white !important;
+}
+.button-danger:hover{
+    background-color: rgb(235, 0, 0) !important;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button-primary,
+  .button-danger {
+    width: 47%;
+  }
+
+  .red-heart{
+    color: red;
+  }
+
+  .heartIcon{
+    font-size: 20px;
+  }
+
+  
+/*CSS pagination*/
+.div_pagintaion {
+  position: relative;
+  text-align: center;
+}
+
+.left-div {
+  position: absolute;
+  left: 0;
+}
+
+.center-div {
+  text-align:center;
+}
+
+.page-button {
+  display: inline-block;
+  padding: 2px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 2px 2px;
+  width: 35px;
+  height: 38px;
+  position: relative;
+}
+
+.page-button:hover {
+  background-color: #ddd;
+}
+
+.page-button.active {
+  background-color: #33C3F0;
+  color: white;
+}
+
+.arrow {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #999;
+  margin-left: 4px;
+}
+
+.arrow.prev {
+  transform: rotate(-45deg);
+  margin-right: 4px;
+}
+
+.arrow.prev span {
+  border-bottom: none;
+  border-left: 5px solid white;
+}
+
+.arrow.next {
+  transform: rotate(135deg);
+  margin-left: 4px;
+}
+
+.pagination_div {
+  display: flex;
+  justify-content: center;
+}
+
+#selectCardsPerPage {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
+.pagination li {
+  margin-right: 10px;
+}
+
+.pagination li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.pagination li.active a {
+  font-weight: bold;
+}
+
+
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Estilos aside */
+#rightSideFixed {
+  position: absolute;
+  top: 716px;
+  right: 120px;
+  width: 250px; 
+  background-color: #ffffff;
+  padding: 20px;
+  z-index: 9999;
+}
+
+
+#rightSideFixed h2 {
+  font-size: 18px;
+}
+
+.book-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.book-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.book-item img {
+  width: 148px;
+  height: auto;
+  margin-right: 10px;
+  margin-top: 0 !important;
+}
+.book-title {
+  margin-bottom: 0;
+}
+.book-item .book-title {
+  font-weight: bold;
+}
+
+.book-item .book-author {
+  color: #999;
+}
+.book-author {
+  margin-bottom: 0;
+}
+
+/* Estilos para o botão fixo */
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 200px;
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  border-radius: 50%;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+
+.buttonSidebySide {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonSidebySide a {
+  display: inline-block;
+  text-align: center;
+  width: 45%;
+}
+
+.addTocart {
+  background: #33C3F0;
+  color: #fff;
+}
+
+.addTocart:hover {
+  background: #33C3F0;
+  color: #fff;
+}
+
+.verMais {
+  background: #ff0c0c;
+  color: #fff;
+}
+
+
+.open-button {
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btnabr {
+  background-color: #04AA6D;
+  color: #fff;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancelt {
+  background-color: red;
+  color: #fff;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+  color: #fff !important;
 }

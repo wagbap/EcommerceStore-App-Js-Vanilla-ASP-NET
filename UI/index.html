@@ -1,373 +1,228 @@
 <!DOCTYPE html>
-<html lang="pt">
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Projeto Final M1</title>
-
-  <link rel="stylesheet" href="css/normalize.css" />
-  <link rel="stylesheet" href="css/skeleton.css" />
-  <link rel="stylesheet" href="css/custom.css" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>carrinho</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 </head>
-
 <body>
   <header id="header" class="header">
     <div class="container">
-      <div class="row">
-        <div class="four columns">
-          <a href="index.html"><img src="img/logo.jpg" id="logo"></a>
-        </div>
-
-        <div class="four columns" style="display:flex;align-items:center;padding:2px;font-size: larger;">
-          <span style="font-weight: bolder;" id="loginStatus"></span>
-          <a id="logoutButton" onclick="logout()" style="display: none; margin-left: 10px;cursor:pointer;">Logout</a>
-        </div>
-
-
-        <div class="two columns u-pull-right">
-          <ul>
-            <li class="submenu">
-              <div>
-                <img src="img/cart.png" id="img-carrinho" />
-                <span id="cartItemCount"></span>
-              </div>
-              <div id="carrinho">
-                <table id="lista-carrinho" class="u-full-width">
-                  <thead>
-                    <tr>
-                      <th>Fotos</th>
-                      <th>Nome</th>
-                      <th>Preço</th>
-                      <th>Quantidade</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody id="cartContainer"></tbody>
-                </table>
-
-                <a onclick="event.preventDefault(); clearCart(); drawCart();" href="#" id="limpar-carrinho"
-                  class="button u-full-width">Esvaziar Carrinho</a>
-                <a href="#" onclick="event.preventDefault(); showCheckout();" id="finalizar-compra"
-                  class="button u-full-width">Finalizar compra</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div id="homepage">
-    <div id="hero">
-      <div class="container">
         <div class="row">
-          <div class="six columns">
-            <div class="conteudo-hero">
-              <h2>Aprende algo novo</h2>
-              <p>Todos os cursos a 15€</p>
-              <form action="#" id="pesquisa" method="post" class="formulario">
-                <input class="u-full-width" type="text" placeholder="Que gostarias de aprender?" id="buscador" />
-                <input onclick="drawCards()" type="button" id="submit-buscador" class="submit-buscador" />
-              </form>
+            <div class="four columns">
+                <img src="img/logo.jpg" id="logo">
+            </div>
+            
+            <div>
+              <strong style="position: absolute; top: 6px; right: 160px;" ><span id="logado"></span></strong>
+              
+              <div class="two columns u-pull-right">
+                <ul>
+                    <li class="submenu">
+                      <div>
+                        <img src="img/cart.png" id="img-carrinho" />
+                        <span id="cartItemCount"></span>
+                      </div>
+                      <div id="carrinho">
+                        <table id="lista-carrinho" class="u-full-width">
+                            <thead>
+                                <tr>
+                                    <th>Foto</th>
+                                    <th>Nome</th>
+                                    <th>Preço</th>
+                                    <th>Quantidade</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="listCart">
+                            </tbody>
+                        </table>
+                        <a onclick="clearCart()" id="limpar-carrinho" class="button u-full-width">Esvaziar Carrinho</a>
+                        <a id="finalizarCompra" class="button u-full-width" onclick="finalizar()">Finalizar Compra</a>
+                      </div>
+                    </li>
+                </ul>
+              </div>
+            </div>
+        </div> 
+    </div>
+    </header>
+    
+    <div id="homepage">
+        <div id="hero">
+            <div class="container">
+            <div class="row">
+                <div class="six columns">
+                <div class="conteudo-hero">
+                    <h2>Aprende algo novo</h2>
+                    <p>Todos os cursos a 15€</p>
+                    <form action="#" id="pesquisa" method="post" class="formulario">
+                    <input class="u-full-width" type="text" placeholder="Que gostarias de aprender?" id="buscador" />
+                    <input onclick="printData()" type="button" id="submit-buscador" class="submit-buscador" />
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    
+        <div class="barra">
+          <div class="container">
+            <div class="row">
+              <div class="four columns icon icon1">
+                <p>
+                  20,000 Cursos online <br />
+                  Explora os temas mais recentes
+                </p>
+              </div>
+              <div class="four columns icon icon2">
+                <p>
+                  Formadores Experientes <br />
+                  Aprende com estilo
+                </p>
+              </div>
+              <div class="four columns icon icon3">
+                <p>
+                  Acesso vitalicio<br />
+                  Aprende ao teu ritmo
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="barra">
-      <div class="container">
-        <div class="row">
-          <div class="four columns icon icon1">
-            <p>
-              20,000 Cursos online <br />
-              Explora os temas mais recentes
-            </p>
-          </div>
-          <div class="four columns icon icon2">
-            <p>
-              Formadores Experientes <br />
-              Aprende com estilo
-            </p>
-          </div>
-          <div class="four columns icon icon3">
-            <p>
-              Acesso vitalicio<br />
-              Aprende ao teu ritmo
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="hide" id="landPage" style="min-height: 1000px;" style="display: block">
-      <div id="lista-cursos" class="container">
-        <h1 id="cabecalho" class="cabecalho">Cursos Online</h1>
-
-        <!-- filtrar por categoria e Favoritos -->
-        <div style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          ">
-          <div class="">
-            <label for="filtroCategoria">Filtrar / Categoria</label>
-            <select class="" id="filtroCategoria" onchange="changeCardsPerPage(); drawCards()">
-              <option value="">Selecionar</option>
-            </select>
-          </div>
-
-
-          <div style="margin-right:500px;" class="">
-            <label for="filtroCategoria">Produtos por página</label>
-            <select id="selectCardsPerPage" onchange="changeCardsPerPage()">
-              <option value="3">3 por página</option>
-              <option value="6">6 por página</option>
-              <option value="9" selected>9 por página</option>
-              <option value="12">12 por página</option>
-            </select>
-          </div>
-          <div style="margin: auto 0">
-            <label for="">Favoritos</label>
-            <label class="switch">
-              <input onchange="drawCards(); goToPage1()" id="toggleSwitch" type="checkbox" />
-              <span class="slider" id="slider"></span>
-              <span id="sliderRound" class="slider-round"></span>
-            </label>
+    
+        <div class="hide" id="landPage" style="min-height: 1000px;" style="display: block">
+          <div id="lista-cursos" class="container">
+            <h1 id="cabecalho" class="cabecalho">Cursos Online</h1>
+    
+            <!-- filtrar por categoria e Favoritos -->
+            <div style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              ">
+              <div class="">
+                <label for="filtroCategoria">Filtrar / Categoria</label>
+                <select class="" id="filtroCategoria" onchange="changeCardsPerPage(); printData()">
+                  <option value="">Selecionar</option>
+                </select>
+              </div>
+    
+    
+              <div style="margin-right:500px;" class="">
+                <label for="filtroCategoria">Produtos por página</label>
+                <select id="selectCardsPerPage" onchange="changeCardsPerPage()">
+                  <option value="3">3 por página</option>
+                  <option value="6">6 por página</option>
+                  <option value="9" selected>9 por página</option>
+                  <option value="12">12 por página</option>
+                </select>
+              </div>
+              <div style="margin: auto 0">
+                <label for="">Favoritos</label>
+                <label class="switch">
+                  <input onchange="printData(); goToPage1()" id="toggleSwitch" type="checkbox" />
+                  <span class="slider" id="slider"></span>
+                  <span id="sliderRound" class="slider-round"></span>
+                </label>
+              </div>
+            </div>
+            <div id="container"></div>
+            <!-- Paginação -->
+            <div class="center-div">
+              <div class="pagination" id="pagination"></div>
+            </div>
           </div>
         </div>
-
-        <div id="dataContainer"></div>
-
-
-
-        <!-- Paginação -->
-        <div class="center-div">
-          <div class="pagination" id="pagination"></div>
-        </div>
-
-
-      </div>
-
     </div>
-  </div>
+    
+    <!-- Página de 5 mais vendidos -->
+    <aside id="rightSideFixed">
 
-  <!-- Página de 5 mais vendidos -->
-  <aside id="rightSideFixed">
+    </aside>
+    </div>
 
-  </aside>
-  </div>
+    <!-- cartões por Id -->
+    <div class="hide" id="cardInfo" style="display: none"></div>
+    <!-- Slider com SwiperJS -->
+    <div class="hide" style="display: none" class="product-slide" id="product-slide">
+    </div>
+    <br />
+    <br />
+    <br />
+    </div>
+    <div id="idTop"></div>
+    <!-- Página de finalização de compras -->
+    <div class="hide" id="finalizar-compraDiv" style="display: none"></div>
 
-  <!-- cartões por Id -->
-  <div class="hide" id="cardInfo" style="display: none"></div>
-  <!-- Slider com SwiperJS -->
-  <div class="hide" style="display: none" class="product-slide" id="product-slide">
-  </div>
-  <br />
-  <br />
-  <br />
-  </div>
-  <div id="idTop"></div>
-  <!-- Página de finalização de compras -->
-  <div class="hide" id="finalizar-compraDiv" style="display: none"></div>
-
-  <!-- Botão fixo -->
-  <a onclick="scrollToTop()" class="scroll-to-top">
+    <!-- Botão fixo -->
+    <a onclick="scrollToTop()" class="scroll-to-top">
     <i class="fas fa-arrow-up"></i>
-  </a>
+    </a>
 
 
-
-  <div class="form-popup" id="myForm">
+    <div class="form-popup" id="myForm">
     <form id="loginForm" class="form-container">
-      <h1>Login</h1>
+        <h1>Login</h1>
 
-      <label for="username"><b>Email</b></label>
-      <input type="text" placeholder="Enter Username" id="username" required>
+        <label for="username"><b>Email</b></label>
+        <input type="text" placeholder="Enter Username" id="username" required>
 
-      <label for="password"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" id="password" required>
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="password" required>
 
-      <button type="submit">Login</button>
-      <button type="button" class="cancel-button" onclick="closeForm()">Close</button>
+        <button type="submit" class="btnabr">Login</button>
+        <button type="button" class="btn cancelt" onclick="closeForm()">Close</button>
     </form>
-  </div>
-
-  <p id="password"></p>
-
-  <!-- Display login status -->
-  <div id="loginStatus"></div>
-
-
-  <footer id="footer" class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="four columns">
-          <nav id="principal" class="menu">
-            <a class="lnk" href="#">Para o teu Negócio</a>
-            <a class="lnk" href="#">Torna-te Formador</a>
-            <a class="lnk" href="#">Aplicações Móveis</a>
-            <a class="lnk" href="#">Suporte</a>
-            <a class="lnk" href="#">Temas</a>
-          </nav>
-        </div>
-        <div class="four columns">
-          <nav id="secundaria" class="menu">
-            <a class="lnk" href="#">Quem Somos?</a>
-            <a class="lnk" href="#">Ofertas de Emprego</a>
-            <a class="lnk" href='#'>Blog</a>
-            <a type="button" onclick="openLoginForm()" id="openLoginFormButton" class="open-button">Login</a>
-          </nav>
-        </div>
-      </div>
+    
     </div>
-  </footer>
 
-  
+    <p id="password"></p>
+
+    <!-- Display login status -->
+    <div id="loginStatus"></div>  
+
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="row">
+                    <div class="four columns">
+                            <nav id="principal" class="menu">
+                                <a class="lnk" href="#">Para o teu Negócio</a>
+                                <a class="lnk" href="#">Torna-te Formador</a>
+                                <a class="lnk" href="#">Aplicações Móveis</a>
+                                <a class="lnk" href="#">Suporte</a>
+                                <a class="lnk" href="#">Temas</a>
+                            </nav>
+                    </div>
+                    <div class="four columns">
+                      <nav id="secundaria" class="menu">
+                          <a class="lnk" href="#">Quem Somos?</a>
+                          <a class="lnk" href="#">Ofertas de Emprego</a>
+                          <a class="lnk" href="#">Blog</a>
+                          <a id="login" type="button"  onclick="openForm()"  class="open-button" >Login</a>
+                          <a id="logout" style="background-color: red;" type="button"  onclick="logout()"  class="open-button" >Logout</a>
+                      </nav>
+                    </div>
+            </div>
+        </div>
+    </footer>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+        </div>
+    </div>
+      
+
+    <script src="js/loadData.js"></script>
+    <script src="js/visual.js"></script>
+    <script src="js/login.js"></script>
 </body>
-<!-- Apps e database -->
-<script src="js/db.js"></script>
-<script src="js/app.js"></script>
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<!-- Visual -->
-<script src="js/visual.js"></script>
-<!-- Admin -->
-<script src="js/admin.js"></script>
-
-<script>
-  document.addEventListener("load", function () {
-    drawCards();
-  });
-</script>
-
-
-<script>
-
-  function openLoginForm() {
-    document.getElementById("myForm").style.display = "block";
-    document.getElementById("openLoginFormButton").style.display = "none";
-  }
-
-  function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-    document.getElementById("openLoginFormButton").style.display = "block";
-  }
-
-  function hideLoginForm() {
-    const loginForm = document.getElementById("loginForm");
-    loginForm.style.display = "none";
-  }
-
-
-  const loginForm = document.getElementById("loginForm");
-
-  loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    const loginData = { User: username, Password: password };
-
-    try {
-      const response = await fetch("https://localhost:44332/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(loginData),
-      });
-
-      if (response.ok) {
-        const result = await response.text();
-
-
-        if (result == "Login Successful") {
-
-          localStorage.setItem("user", username); // Armazenar o nome de usuário no armazenamento local
-          showLoginStatus(`Logged in as: ${username}`);
-          updateLogoutButton(true);
-          hideLoginForm();
-          scrollToTop(); // Scroll to top after login
-
-          alert(result); // Exemplo: exibir mensagem de login bem-sucedido
-
-        } else {
-          alert(result); // Exemplo: exibir mensagem de erro de login retornada pelo API
-        }
-      } else {
-        const errorResult = await response.text();
-        alert(errorResult); // Exemplo: exibir mensagem de erro de login retornada pelo API
-      }
-    } catch (error) {
-      console.log(error);
-      alert("Login failed"); // Example: display login failed message
-    }
-  });
-
-  const user = localStorage.getItem("user");
-  if (user) {
-    showLoginStatus(`Logged in as: ${user}`);
-    updateLogoutButton(true);
-  }
-
-  function showLoginStatus(message) {
-    const statusElement = document.getElementById('loginStatus');
-    statusElement.textContent = message;
-  }
-
-  function logout() {
-  localStorage.removeItem('user');
-  showLoginStatus('Logged out.');
-  updateLogoutButton(false);
-  window.location.reload(); // Recarregar a página após o logout
-}
-
-
-function updateLogoutButton(loggedIn) {
-  const logoutButton = document.getElementById('logoutButton');
-  const loginButton = document.getElementById('openLoginFormButton');
-
-  if (loggedIn) {
-    logoutButton.style.display = 'block';
-    loginButton.style.display = 'none';
-    localStorage.setItem('loggedIn', 'true');
-  } else {
-    logoutButton.style.display = 'none';
-    loginButton.style.display = 'block';
-    localStorage.removeItem('loggedIn');
-  }
-}
-
-  //after logout disply login button block
-  function updateLoginButton() {
-    const loginButton = document.getElementById('openLoginFormButton');
-    loginButton.style.display = 'block';
-  }
-
-  // Verificar o estado de login ao carregar a página  
-  function updateLoginButton() {
-  const loginButton = document.getElementById('openLoginFormButton');
-  loginButton.style.display = 'block';
-}
-
-// Verificar o estado de login ao carregar a página
-// Verificar o estado de login ao carregar a página
-const loggedIn = localStorage.getItem('loggedIn');
-if (loggedIn) {
-  updateLogoutButton(true);
-}
-
-</script>
-
 </html>
