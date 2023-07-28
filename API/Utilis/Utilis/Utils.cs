@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -154,5 +155,32 @@ namespace Cursos
         {
             return "'" + s + "'";
         }
+
+        //Conversão de DataSet para List<Dictionary<string, Object>> Feito por Dmytro
+        public static List<Dictionary<string, Object>> DataSetToList(DataSet ds)
+        {
+            List<Dictionary<string, Object>> lst = new List<Dictionary<string, Object>>();
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                DataTable dataTable = ds.Tables[0];
+
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    Dictionary<string, Object> rowDict = new Dictionary<string, Object>();
+
+                    foreach (DataColumn col in dataTable.Columns)
+                    {
+                        rowDict.Add(col.ColumnName, row[col]);
+                    }
+
+                    lst.Add(rowDict);
+                }
+            }
+
+            return lst;
+        }
+
+
     }
 }

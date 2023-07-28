@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BD\BD\BD.csproj" />
     <ProjectReference Include="..\..\Utilis\Utilis\Utilis.csproj" />
   </ItemGroup>
 

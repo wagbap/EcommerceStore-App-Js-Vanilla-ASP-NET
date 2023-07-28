@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DLjDPaxvC4r5SFgmPxusAXNAKDeKTFNpitVipg2fYSuDdqankNjUcVTsCTeZcdg07taABNFAePAcGvLHXec39w==",
+  "dgSpecHash": "4VCxktWsg1sGbDFKYJEJypOcbXh73x7YeHS8vwktgr6RxCRojanmiXmL1VSDzxr4oCEzHPV2sgtrjglR2m70ww==",
   "success": true,
-  "projectFilePath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\Biblio.csproj",
+  "projectFilePath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\Biblio.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wagne\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\wagne\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

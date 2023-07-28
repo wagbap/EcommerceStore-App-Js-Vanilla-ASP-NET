@@ -47,16 +47,32 @@
           }
         }
       },
-      "Newtonsoft.Json/13.0.1": {
+      "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
             "related": ".xml"
+          }
+        }
+      },
+      "Newtonsoft.Json.Bson/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -173,6 +189,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Newtonsoft.Json.Bson": "1.0.2",
           "System.Data.SqlClient": "4.8.5"
         },
         "compile": {
@@ -187,7 +204,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "BD": "1.0.0",
-          "System.Data.SqlClient": "4.8.5",
+          "Newtonsoft.Json": "13.0.3",
           "Utilis": "1.0.0"
         },
         "compile": {
@@ -201,6 +218,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
           "System.Data.SqlClient": "4.8.5"
         },
         "compile": {
@@ -331,14 +349,15 @@
         "version.txt"
       ]
     },
-    "Newtonsoft.Json/13.0.1": {
-      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
       "type": "package",
-      "path": "newtonsoft.json/13.0.1",
+      "path": "newtonsoft.json/13.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
+        "README.md",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -347,15 +366,38 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
         "lib/netstandard1.0/Newtonsoft.Json.dll",
         "lib/netstandard1.0/Newtonsoft.Json.xml",
         "lib/netstandard1.3/Newtonsoft.Json.dll",
         "lib/netstandard1.3/Newtonsoft.Json.xml",
         "lib/netstandard2.0/Newtonsoft.Json.dll",
         "lib/netstandard2.0/Newtonsoft.Json.xml",
-        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "packageIcon.png"
+      ]
+    },
+    "Newtonsoft.Json.Bson/1.0.2": {
+      "sha512": "QYFyxhaABwmq3p/21VrZNYvCg3DaEoN/wUuw5nmfAf0X3HLjgupwhkEWdgfb9nvGAUIv3osmZoD3kKl4jxEmYQ==",
+      "type": "package",
+      "path": "newtonsoft.json.bson/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net45/Newtonsoft.Json.Bson.dll",
+        "lib/net45/Newtonsoft.Json.Bson.pdb",
+        "lib/net45/Newtonsoft.Json.Bson.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.pdb",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.pdb",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.xml",
+        "newtonsoft.json.bson.1.0.2.nupkg.sha512",
+        "newtonsoft.json.bson.nuspec"
       ]
     },
     "runtime.native.System.Data.SqlClient.sni/4.7.0": {
@@ -609,26 +651,27 @@
     },
     "BD/1.0.0": {
       "type": "project",
-      "path": "../BD/BD/BD.csproj",
-      "msbuildProject": "../BD/BD/BD.csproj"
+      "path": "../../../BD/BD/BD.csproj",
+      "msbuildProject": "../../../BD/BD/BD.csproj"
     },
     "Biblio/1.0.0": {
       "type": "project",
-      "path": "../Biblio/Biblio/Biblio.csproj",
-      "msbuildProject": "../Biblio/Biblio/Biblio.csproj"
+      "path": "../../../Biblio/Biblio/Biblio.csproj",
+      "msbuildProject": "../../../Biblio/Biblio/Biblio.csproj"
     },
     "Utilis/1.0.0": {
       "type": "project",
-      "path": "../Utilis/Utilis/Utilis.csproj",
-      "msbuildProject": "../Utilis/Utilis/Utilis.csproj"
+      "path": "../../../Utilis/Utilis/Utilis.csproj",
+      "msbuildProject": "../../../Utilis/Utilis/Utilis.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "Biblio >= 1.0.0",
       "Microsoft.VisualBasic >= 10.3.0",
-      "Newtonsoft.Json >= 13.0.1",
-      "System.Data.SqlClient >= 4.8.5"
+      "Newtonsoft.Json >= 13.0.3",
+      "System.Data.SqlClient >= 4.8.5",
+      "Utilis >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -637,11 +680,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj",
+      "projectUniqueName": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj",
       "projectName": "Cursos",
-      "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj",
+      "projectPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj",
       "packagesPath": "C:\\Users\\wagne\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Cursos\\obj\\",
+      "outputPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Cursos\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\wagne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -659,8 +702,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\Biblio.csproj": {
-              "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\Biblio.csproj"
+            "C:\\Users\\wagne\\source\\repos\\Biblio\\Biblio\\Biblio.csproj": {
+              "projectPath": "C:\\Users\\wagne\\source\\repos\\Biblio\\Biblio\\Biblio.csproj"
+            },
+            "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj": {
+              "projectPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj"
             }
           }
         }
@@ -681,7 +727,7 @@
           },
           "Newtonsoft.Json": {
             "target": "Package",
-            "version": "[13.0.1, )"
+            "version": "[13.0.3, )"
           },
           "System.Data.SqlClient": {
             "target": "Package",

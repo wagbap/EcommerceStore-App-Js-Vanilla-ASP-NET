@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AP3fWWPd1yyx5hibyzrS5iPJkUssqiZQe2qIT3i5hFDg+8LKtnHcdlb4XVt/HcIeMMzZTG8H7VmiXDQ4cAjVkg==",
+  "dgSpecHash": "JYQaRip9vAZIzLj4mlHwfFT3jZhSTqHkQBg/m2+XJJh8ZyVKV0BihLsIREyKE9lzFXThdyWSq2o2CJV+aWpQYQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\BD\\BD\\BD.csproj",
+  "projectFilePath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\BD\\BD\\BD.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wagne\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\wagne\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

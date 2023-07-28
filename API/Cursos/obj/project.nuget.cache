@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "9RuT/Qmd6ouVB2qtgHDZi4LlBHQrtJJSobVC7cI4wmsaNT1lD98yEsMBB+w04LnOwFxKGJbtR16Y/58bK/qTCA==",
+  "dgSpecHash": "gMfZ7bv0rJb7rTyrXP8jOSnRewEKHecgUdVOc8Jl1DdTY5JDhaIhLAyulguyV8t8VCpRnGTP4KEqAb5wf1XUVg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj",
+  "projectFilePath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wagne\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\wagne\\.nuget\\packages\\microsoft.visualbasic\\10.3.0\\microsoft.visualbasic.10.3.0.nupkg.sha512",
     "C:\\Users\\wagne\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
-    "C:\\Users\\wagne\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\wagne\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\wagne\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\wagne\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
     "C:\\Users\\wagne\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\wagne\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",

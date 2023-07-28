@@ -8,12 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Biblio\Biblio\Biblio.csproj" />
+    <ProjectReference Include="..\..\..\Biblio\Biblio\Biblio.csproj" />
+    <ProjectReference Include="..\Utilis\Utilis\Utilis.csproj" />
   </ItemGroup>
 
 </Project>

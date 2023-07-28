@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj": {}
+    "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\BD\\BD\\BD.csproj": {
+    "C:\\Users\\wagne\\source\\repos\\BD\\BD\\BD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\BD\\BD\\BD.csproj",
+        "projectUniqueName": "C:\\Users\\wagne\\source\\repos\\BD\\BD\\BD.csproj",
         "projectName": "BD",
-        "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\BD\\BD\\BD.csproj",
+        "projectPath": "C:\\Users\\wagne\\source\\repos\\BD\\BD\\BD.csproj",
         "packagesPath": "C:\\Users\\wagne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\BD\\BD\\obj\\",
+        "outputPath": "C:\\Users\\wagne\\source\\repos\\BD\\BD\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wagne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Newtonsoft.Json.Bson": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.5, )"
@@ -65,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\Biblio.csproj": {
+    "C:\\Users\\wagne\\source\\repos\\Biblio\\Biblio\\Biblio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\Biblio.csproj",
+        "projectUniqueName": "C:\\Users\\wagne\\source\\repos\\Biblio\\Biblio\\Biblio.csproj",
         "projectName": "Biblio",
-        "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\Biblio.csproj",
+        "projectPath": "C:\\Users\\wagne\\source\\repos\\Biblio\\Biblio\\Biblio.csproj",
         "packagesPath": "C:\\Users\\wagne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\obj\\",
+        "outputPath": "C:\\Users\\wagne\\source\\repos\\Biblio\\Biblio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wagne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -89,11 +93,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\BD\\BD\\BD.csproj": {
-                "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\BD\\BD\\BD.csproj"
+              "C:\\Users\\wagne\\source\\repos\\BD\\BD\\BD.csproj": {
+                "projectPath": "C:\\Users\\wagne\\source\\repos\\BD\\BD\\BD.csproj"
               },
-              "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj": {
-                "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj"
+              "C:\\Users\\wagne\\source\\repos\\Utilis\\Utilis\\Utilis.csproj": {
+                "projectPath": "C:\\Users\\wagne\\source\\repos\\Utilis\\Utilis\\Utilis.csproj"
               }
             }
           }
@@ -108,9 +112,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "System.Data.SqlClient": {
+            "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[4.8.5, )"
+              "version": "[13.0.3, )"
             }
           },
           "imports": [
@@ -133,14 +137,14 @@
         }
       }
     },
-    "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj": {
+    "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj",
+        "projectUniqueName": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj",
         "projectName": "Cursos",
-        "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj",
+        "projectPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Cursos\\Cursos.csproj",
         "packagesPath": "C:\\Users\\wagne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Cursos\\obj\\",
+        "outputPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Cursos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wagne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -158,8 +162,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\Biblio.csproj": {
-                "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Biblio\\Biblio\\Biblio.csproj"
+              "C:\\Users\\wagne\\source\\repos\\Biblio\\Biblio\\Biblio.csproj": {
+                "projectPath": "C:\\Users\\wagne\\source\\repos\\Biblio\\Biblio\\Biblio.csproj"
+              },
+              "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj": {
+                "projectPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj"
               }
             }
           }
@@ -180,7 +187,7 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[13.0.1, )"
+              "version": "[13.0.3, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
@@ -210,14 +217,14 @@
         }
       }
     },
-    "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj": {
+    "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj",
+        "projectUniqueName": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj",
         "projectName": "Utilis",
-        "projectPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj",
+        "projectPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\Utilis.csproj",
         "packagesPath": "C:\\Users\\wagne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wagne\\OneDrive\\Ambiente de Trabalho\\webAPI\\Vue-Js-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\obj\\",
+        "outputPath": "C:\\Users\\wagne\\source\\repos\\Js-Vanilla-ASP-NET-Core-WebAPI\\API\\Utilis\\Utilis\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wagne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -246,6 +253,75 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\wagne\\source\\repos\\Utilis\\Utilis\\Utilis.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\wagne\\source\\repos\\Utilis\\Utilis\\Utilis.csproj",
+        "projectName": "Utilis",
+        "projectPath": "C:\\Users\\wagne\\source\\repos\\Utilis\\Utilis\\Utilis.csproj",
+        "packagesPath": "C:\\Users\\wagne\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wagne\\source\\repos\\Utilis\\Utilis\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\wagne\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.5, )"
