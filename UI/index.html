@@ -21,6 +21,11 @@
             <div class="four columns">
                 <img src="img/logo.jpg" id="logo">
             </div>
+
+            <div class="four columns" style="display:flex;align-items:center;padding:2px;font-size: larger;">
+              <span style="font-weight: bolder;" id="loginStatus"></span>
+              <a id="logoutButton" onclick="logout()" style="display: none; margin-left: 10px;cursor:pointer;">Logout</a>
+            </div>
             
             <div>
               <strong style="position: absolute; top: 6px; right: 160px;" ><span id="logado"></span></strong>
@@ -170,19 +175,22 @@
     </a>
 
 
-    <div class="form-popup" id="myForm">
-    <form id="loginForm" class="form-container">
-        <h1>Login</h1>
 
+
+    <div class="form-popup" id="myForm">
+      <form id="loginForm" class="form-container">
+        <h1>Login</h1>
+  
         <label for="username"><b>Email</b></label>
         <input type="text" placeholder="Enter Username" id="username" required>
-
-        <label for="psw"><b>Password</b></label>
+  
+        <label for="password"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" id="password" required>
-
-        <button type="submit" class="btnabr">Login</button>
-        <button type="button" class="btn cancelt" onclick="closeForm()">Close</button>
-    </form>
+  
+        <button type="submit">Login</button>
+        <button type="button" class="cancel-button" onclick="closeForm()">Close</button>
+      </form>
+    </div>
     
     </div>
 
@@ -208,8 +216,9 @@
                           <a class="lnk" href="#">Quem Somos?</a>
                           <a class="lnk" href="#">Ofertas de Emprego</a>
                           <a class="lnk" href="#">Blog</a>
-                          <a id="login" type="button"  onclick="openForm()"  class="open-button" >Login</a>
-                          <a id="logout" style="background-color: red;" type="button"  onclick="logout()"  class="open-button" >Logout</a>
+                          <a type="button" style="width:100px;" id="openRegisterFormButton" class="open-button">Registrar</a>
+                          <a type="button" style="width:100px;" onclick="openLoginForm()" id="openLoginFormButton"
+                            class="open-button">Login</a>
                       </nav>
                     </div>
             </div>

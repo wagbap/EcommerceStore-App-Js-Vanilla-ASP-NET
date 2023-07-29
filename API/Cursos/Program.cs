@@ -194,7 +194,7 @@ app.MapPost("/GetCarinho", (string Cliente_id) =>
                 // Criar um objeto novo para cada coluna
                 var carinhoObj = new
                 {
-                    ISBN = linha["curso_ISBN"],
+                    ISBN = linha["Curso_ISBN"],
                     Cliente_id = linha["Cliente_id"],
                     Quantidade = linha["Quantidade"],
                     Total = linha["Total"]

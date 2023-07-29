@@ -288,6 +288,7 @@ async function addToCart(isbn, tipo = null) {
 
 
 
+
 async function removellFromCart(isbn) {
     let cart = await getCart();
     let matchingCartIndex = cart.findIndex((cartItem) => cartItem.ISBN === isbn);
