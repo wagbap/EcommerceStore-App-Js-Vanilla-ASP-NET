@@ -107,11 +107,7 @@ async function printData() {
                <div class="info-card">
                <div class="button-container">
                <h4>${course.Curso}</h4>
-               <i class="heartIcon ${
-                isFavorite ? "fas red-heart" : "far"
-              } fa-heart" onclick="updateFavorites(${
-     course.ISBN
-   }); printData();"></i>
+               <i class="heartIcon ${isFavorite?"fas red-heart":"far"} fa-heart" onclick="updateFavorites(${course.ISBN}); printData();"></i>
                </div>   
                <p>${course.Autor}</p>
                    <img src="img/estrelas.png">
@@ -285,7 +281,6 @@ async function addToCart(isbn, tipo = null) {
   // Atualize a exibição do carrinho
   printCart();
 }
-
 
 
 
