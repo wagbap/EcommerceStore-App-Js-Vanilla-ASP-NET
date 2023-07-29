@@ -2,7 +2,7 @@
 onload = iniData;
 
 async function iniData() {
-    getUserId()
+    getUserId();
     await getCart();
     await listCategory();
     await printData();
