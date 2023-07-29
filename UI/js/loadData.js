@@ -252,9 +252,11 @@ async function addToCart(isbn, tipo = null) {
   let cart = await getCart();
   let matchingCartIndex = cart.findIndex((cartItem) => cartItem.ISBN === isbn);
   let gUser = getUserId();
-  if (gUser === null) return alert("Não está logado");
+  if (gUser === -1) {  alert("Não está logado"); return;}
+  //Código a seguir só será executado se o usuário estiver logado
 
   let cartItem = {
+      DataVenda: new Date().toISOString(), // Data da venda com a data atual do sistema
       UserID: gUser.toString(),
       ISBN: isbn.toString(),
       Quantidade: 1, // Define o valor padrão da quantidade como 1
@@ -319,8 +321,9 @@ async function clearCart(){
 
 
 async function finalizar() {
-    let gUser = getUserId();
-    if (gUser === null) return alert("Não está logado");
+  let gUser = getUserId();
+  if (gUser === -1) {  alert("Não está logado"); return;}
+  //Código a seguir só será executado se o usuário estiver logado
     let userID = "?userID=" + gUser.toString();
     let result = await getAPI("Finalizar", userID);
     if (result == 1){
