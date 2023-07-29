@@ -5,7 +5,7 @@ async function iniData() {
     getUserId();
     await getCart();
     await listCategory();
-    await printData();
+    await printData();  
     await updateCart();
     await printCart();
     await drawTop5();
@@ -63,6 +63,9 @@ async function getData() {
 /* ---------------------------------- */
 
 async function printData() {
+
+  const soldCourses = await countSoldCourses();
+  
     const cartItems = await getCart();
     const cartItemCount = cartItems.reduce(
         (total, item) => total + parseInt(item.Quantidade),
@@ -95,11 +98,17 @@ async function printData() {
       currentRow = document.createElement("div");
       currentRow.className = "row";
       container.appendChild(currentRow);
-    }
+
+    }   
+
 
     // Verificar se o item está nos favoritos
-     
     const isFavorite = favorites.some((obj) => obj.ISBN === course.ISBN);
+
+    // Obter a quantidade vendida do curso
+		const soldCount = soldCourses[course.ISBN];
+		const soldText = soldCount ? `${soldCount.quantity} Vendidos` : "";
+
 
     currentRow.innerHTML += `
        <div class="four columns">
@@ -112,14 +121,13 @@ async function printData() {
                </div>   
                <p>${course.Autor}</p>
                    <img src="img/estrelas.png">
+                   <p class="preco"> <p>${soldText}</p><br>
                    <p class="preco">${course.Preço.toString()}€ <span class="u-pull-right ">${course.Percentagem.toString()}€</span></p>
           
                    <div class="button-container">  
                    <a onclick="addToCart(${course.ISBN}, 'new')" class="u-full-width button-primary button input adicionar-carrinho">Carrinho</a>
                  
-                   <a onclick="trocarDiv('cardInfo'), listarPorId(${
-                     course.ISBN
-                   })" href="#" class="button-danger button">Ver <i class="fa-sharp fa-solid fa-plus"></i> </a>
+                   <a onclick="trocarDiv('cardInfo'), listarPorId(${course.ISBN})" href="#" class="button-danger button">Ver<i class="fa-sharp fa-solid fa-plus"></i> </a>
                  </div>
                </div>
            </div> <!--.card-->
@@ -375,20 +383,52 @@ async function finalizar() {
     }
 }
 
-/* ---------------------------- */
+/* Contar os vendidos */
+async function getSoldItems() { 
+	const response = await fetch('https://localhost:44332/GetSolds', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		}});
+	
+	const data = await response.json();
 
-/* TOP 5 */
+	if (data == null) {
+		data = [];
+	}
 
-//Função para desenhar cursos mais vendidos
-
-async function getSold() {
-    let sold = await getAPI("GetSolds");
-    if (sold === null) sold = [];
-    return sold;
+	return data;
 }
 
+// count sold courses
+async function countSoldCourses() {
+	const soldCourses = await getSoldItems();
+	const allData = await getData();
+	const soldCount = {};
+
+	soldCourses.forEach((item) => {
+		const course = allData.find((c) => c.ISBN === item.ISBN);
+		if (course) {
+			if (!soldCount[course.ISBN]) {
+				soldCount[course.ISBN] = {
+					course: course,
+					quantity: 0,
+				};
+			}
+			soldCount[course.ISBN].quantity += item.Quantidade;  // Ajuste aqui para item.Quantidade
+		}
+	});
+
+	return soldCount;
+}
+
+
+
+
+/* TOP 5 */
+//Função para desenhar cursos mais vendidos
 async function drawTop5() {
-    let sold5 = await getSold();
+    let sold5 = await getSoldItems();
     let allData = await getData();
     const container = document.getElementById("rightSideFixed");
     container.innerHTML = "";
@@ -462,19 +502,19 @@ async function listarPorId(idTst) {
     <h1>Detalhes do Curso</h1>
       <div class="product-container">
         <div class="product-image">
-            <img src=${course.imagem} alt="Product Image">
+            <img src="img/${course.FotoCapa}" alt="Product Image">
         </div>
         
         <div class="product-details">
-            <h4>${course.titulo}</h4>
-            <p class="price">${course.preco.toString()}€</p>
+            <h4>${course.Curso}</h4>
+            <p class="price">${course.Preço.toString()}€</p>
             <p class="description">Neste curso, você aprenderá os fundamentos da culinária vegetariana,
                 desde a seleção e preparação dos ingredientes até a criação de pratos equilibrados e 
                 cheios de sabor. Nossos especialistas em culinária vegetariana compartilharão dicas e
                   truques valiosos, além de receitas exclusivas que irão inspirá-lo a explorar uma 
                   variedade de ingredientes frescos e nutritivos.</p>
             <div class="quantity">
-                <label for="quantity">Author: ${course.autor}</label>
+                <label for="quantity">Author: ${course.Autor}</label>
             </div>
             <br />
             <a href="#"><button onclick="trocarDiv('landPage'); verificarAtivoCardInfo();" class="button-danger">Voltar</button></a>
@@ -495,94 +535,4 @@ async function listarPorId(idTst) {
   swiperJs();
 }
 //////////////////////////////////////////////Swiper slider por Categoria/////////////////////////////////////////
-// desenhar slide
-async function listarSlide(idTst) {
-  const allData = await getData();
-  const selectedCourse = await allData.find((course) => course.ISBN == idTst);
-  
-  if (selectedCourse) {
-  const filteredCourses = allData.filter(
-  (course) => course.categoria == selectedCourse.categoria
-  );
 
-  const slideProd = document.getElementById("product-slide");
-slideProd.innerHTML = "";
-
-if (filteredCourses.length > 0) { // Obter a contagem de cursos vendidos
-  const swiperSlides = filteredCourses.map((course) => {
-    // Verificar se o ID do curso é igual ao ID selecionado
-    if (course.ISBN == idTst) {
-      return ""; // Pular o curso, não incluir no slide
-    }
-
-    // Obter a quantidade vendida do curso
-    /* const soldCount = soldCourses[course.ISBN];
-    const soldText = soldCount ? `${soldCount.quantity} Vendidos` : ""; */
-
-    return `
-      <div class="swiper-slide">
-        <div class="card" id="${course.ISBN}">
-          <img src=${course.imagem} class="imagen-curso u-full-width">
-          <div class="info-card">
-            <div class="button-container">
-              <h4>${course.titulo}</h4>
-            </div>   
-            <p>${course.autor}</p>
-            <img src="img/estrelas.png" style="width: 80px;">
-            <p class="preco"> <span class="u-pull-right">${course.promocao}€</span></p>
-            <div class="button-container">  
-              <a onclick="event.preventDefault(); addToCart(${course.ISBN}); drawCart();" href="#" class="u-full-width button-primary button input adicionar-carrinho" data-id="1"><i class="fa-solid fa-cart-plus"></i></a>
-              <a onclick="trocarDiv('cardInfo', 'swiperSlide'), listarPorId(${course.ISBN})"  class="button-danger button"><i class="fa-sharp fa-solid fa-plus"></i> </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  });
-  slideProd.innerHTML += `
-    <br />
-    <div class="container">
-      <div class="product-container">
-        <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            ${swiperSlides.join("")}
-          </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
-    </div>
-  `;
-  } else {
-    slideProd.innerHTML = "Nenhum curso encontrado com a mesma categoria.";
-  }
-  // Inicializar o Swiper
-  swiperJs();
-  } else {
-    slideProd.innerHTML = "Nenhum curso encontrado com a mesma categoria.";
-  }
-}
-
-  function verificarAtivoCardInfo() {
-    let cardInfoElement = document.getElementById("cardInfo");
-    let asideElement = document.getElementById("rightSideFixed");
-  
-    if (cardInfoElement) {
-      var cardInfoStyles = window.getComputedStyle(cardInfoElement);
-      var isCardInfoVisible = cardInfoStyles.display === "block";
-  
-      if (window.innerWidth >= 1800 && !isCardInfoVisible) {
-        asideElement.style.display = "block";
-      } else {
-        asideElement.style.display = "none";
-      }
-    }
-  }
-  
-  function handleWindowResize() {
-    verificarAtivoCardInfo();
-  }
-  
-  window.addEventListener("load", handleWindowResize);
-  window.addEventListener("resize", handleWindowResize);

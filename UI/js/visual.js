@@ -1,19 +1,19 @@
 /////////////////////////////SWIPER////////////////////////////////////
 function swiperJs() {
   var swiper = new Swiper(".mySwiper", {
-      slidesPerView: 3,
-      spaceBetween: 30,
-      centeredSlides: false,
-      slidesPerGroupSkip: 3,
-     /*  loop: true,
-      autoplay: {
-          delay: 1900,
-          disableOnInteraction: false,
-      }, */
-      navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-      },
+    slidesPerView: 3,
+    spaceBetween: 30,
+    centeredSlides: false,
+    slidesPerGroupSkip: 3,
+    /*  loop: true,
+     autoplay: {
+         delay: 1900,
+         disableOnInteraction: false,
+     }, */
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
   });
 }
 
@@ -24,13 +24,13 @@ function toggleSwitchHandler() {
   const sliderRound = document.getElementById('sliderRound');
   const sliderSpan = document.getElementById("slider");
   toggleSwitch.addEventListener('change', function () {
-      if (toggleSwitch.checked) {
-          sliderRound.style.transform = 'translateX(20px)';
-          sliderSpan.style.backgroundColor = 'green';
-      } else {
-          sliderRound.style.transform = 'translateX(0)';
-          sliderSpan.style.backgroundColor = 'red';
-      }
+    if (toggleSwitch.checked) {
+      sliderRound.style.transform = 'translateX(20px)';
+      sliderSpan.style.backgroundColor = 'green';
+    } else {
+      sliderRound.style.transform = 'translateX(0)';
+      sliderSpan.style.backgroundColor = 'red';
+    }
   });
 }
 
@@ -40,29 +40,109 @@ function toggleSwitchHandler() {
 function scrollToTop() {
   const scrollToTop = document.documentElement.scrollTop || document.body.scrollTop;
   if (scrollToTop > 0) {
-      window.scrollTo({
-          top: 0,
-          behavior:'smooth',
-      });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 }
 
 ///////////// verificar o estado do card e o tamanho do ecran para ocultar o aside //////////////////////////////
+
 function verificarAtivoCardInfo() {
-let cardInfoElement = document.getElementById("cardInfo");
-let asideElement = document.getElementById("rightSideFixed");
+  let cardInfoElement = document.getElementById("cardInfo");
+  let asideElement = document.getElementById("rightSideFixed");
 
-if (cardInfoElement) {
-  var cardInfoStyles = window.getComputedStyle(cardInfoElement);
-  var isCardInfoVisible = cardInfoStyles.display === "block";
+  if (cardInfoElement) {
+    var cardInfoStyles = window.getComputedStyle(cardInfoElement);
+    var isCardInfoVisible = cardInfoStyles.display === "block";
 
-  if (window.innerWidth >= 1800 && !isCardInfoVisible) {
-    asideElement.style.display = "block";
-  } else {
-    asideElement.style.display = "none";
+    if (window.innerWidth >= 1800 && !isCardInfoVisible) {
+      asideElement.style.display = "block";
+    } else {
+      asideElement.style.display = "none";
+    }
   }
 }
+
+function handleWindowResize() {
+  verificarAtivoCardInfo();
 }
+
+window.addEventListener("load", handleWindowResize);
+window.addEventListener("resize", handleWindowResize);
+
+// desenhar slide
+async function listarSlide(idTst) {
+  const allData = await getData();
+  const selectedCourse = await allData.find((course) => course.ISBN == idTst);
+
+  if (selectedCourse) {
+    const filteredCourses = allData.filter(
+      (course) => course.Categoria == selectedCourse.Categoria
+    );
+
+    const slideProd = document.getElementById("product-slide");
+    slideProd.innerHTML = "";
+
+    if (filteredCourses.length > 0) { // Obter a contagem de cursos vendidos
+      const swiperSlides = filteredCourses.map((course) => {
+        // Verificar se o ID do curso é igual ao ID selecionado
+        if (course.ISBN == idTst) {
+          return ""; // Pular o curso, não incluir no slide
+        }
+
+            const soldCourses =  countSoldCourses();
+    				// Obter a quantidade vendida do curso
+            const soldCount = soldCourses[course.ISBN];
+            const soldText = soldCount ? `${soldCount.quantity} Vendidos` : "";
+
+        return `
+      <div class="swiper-slide">
+        <div class="card" id="${course.ISBN}">
+          <img src="img/${course.FotoCapa}" class="imagen-curso u-full-width">
+          <div class="info-card">
+            <div class="button-container">
+              <h4>${course.Curso}</h4>
+            </div>   
+            <p>${course.Autor}</p>
+            <img src="img/estrelas.png" style="width:80px;">
+            <p class="preco"> <p>${soldText}</p></p><br>
+            <p class="preco"> <span class="u-pull-right">${course.Preço}€</span></p>
+            <div class="button-container">  
+              <a onclick="event.preventDefault(); addToCart(${course.ISBN}); drawCart();" href="#" class="u-full-width button-primary button input adicionar-carrinho" data-id="1"><i class="fa-solid fa-cart-plus"></i></a>
+              <a onclick="trocarDiv('cardInfo', 'swiperSlide'), listarPorId(${course.ISBN})"  class="button-danger button"><i class="fa-sharp fa-solid fa-plus"></i> </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+      });
+      slideProd.innerHTML += `
+    <br />
+    <div class="container">
+      <div class="product-container">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            ${swiperSlides.join("")}
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+  `;
+    } else {
+      slideProd.innerHTML = "Nenhum curso encontrado com a mesma categoria.";
+    }
+    // Inicializar o Swiper
+    swiperJs();
+  } else {
+    slideProd.innerHTML = "Nenhum curso encontrado com a mesma categoria.";
+  }
+}
+
 
 /* PAGINAção */
 
@@ -74,7 +154,7 @@ let totalCards = getData().length;
 function goToPage1() {
   currentPage = 1;
   printData();
-    updatePagination(totalCards);
+  updatePagination(totalCards);
 }
 
 // Função para atualizar a exibição da paginação
@@ -175,7 +255,7 @@ function createPageButton(text) {
 
 
 function handleWindowResize() {
-verificarAtivoCardInfo();
+  verificarAtivoCardInfo();
 }
 
 window.addEventListener("load", handleWindowResize);
