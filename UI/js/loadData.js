@@ -408,11 +408,11 @@ async function drawTop5() {
       if (course) {
         html += `
         <li class="book-item">
-                  <img src="${course.imagem}">
+                  <img src="img/${course.FotoCapa}">
                   <div class="book-details">
-                    <p class="book-title">${course.titulo}</p>
+                    <p class="book-title">${course.Curso}</p>
                     <img src="img/estrelas.png" style="width: 80px; margin-top: 12px">
-                    <p class="book-author">${course.autor}</p>
+                    <p class="book-author">${course.Autor}</p>
                     <div class="buttonSidebySide">  
                       <a onclick="event.preventDefault(); addToCart(${course.ISBN}); printData();"class="addTocart" data-id="1"><i class="fa-solid fa-cart-plus"></i></a>
                       <a onclick="trocarDiv('cardInfo'), listarPorId(${course.ISBN})"class="verMais"><i class="fa-sharp fa-solid fa-plus"></i> </a>
