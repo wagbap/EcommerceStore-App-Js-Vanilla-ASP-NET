@@ -127,6 +127,10 @@ async function printData() {
        `;
   });
 
+  
+	// Atualizar a exibição da paginação
+	updatePagination(filteredCourses.length);
+
 }
 /* Favoritos */
 async function getFav() {
@@ -410,7 +414,7 @@ async function drawTop5() {
                     <img src="img/estrelas.png" style="width: 80px; margin-top: 12px">
                     <p class="book-author">${course.autor}</p>
                     <div class="buttonSidebySide">  
-                      <a onclick="event.preventDefault(); addToCart(${course.ISBN}); drawCart();"class="addTocart" data-id="1"><i class="fa-solid fa-cart-plus"></i></a>
+                      <a onclick="event.preventDefault(); addToCart(${course.ISBN}); printData();"class="addTocart" data-id="1"><i class="fa-solid fa-cart-plus"></i></a>
                       <a onclick="trocarDiv('cardInfo'), listarPorId(${course.ISBN})"class="verMais"><i class="fa-sharp fa-solid fa-plus"></i> </a>
                     </div>
                   </div>
@@ -425,114 +429,6 @@ async function drawTop5() {
     container.innerHTML = html;
   }
 
-/* PAGINAção */
-
-let currentPage = 1;
-let cardsPerPage = 9;
-let totalCards = getData().length; // Default value
-
-// Ir para a primeira página
-function goToPage1() {
-  currentPage = 1;
-    drawCards();
-    updatePagination(totalCards);
-}
-
-// Função para atualizar a exibição da paginação
-function updatePagination(totalCards) {
-  const totalPages = Math.ceil(totalCards / cardsPerPage);
-  const pagination = document.getElementById("pagination");
-  pagination.innerHTML = "";
-
-  // Função para criar botões de página com seta
-  function createPageButton(pageNumber, isArrow) {
-    const pageButton = document.createElement("button");
-
-    if (isArrow) {
-      const arrowElement = document.createElement("i");
-      arrowElement.classList.add("fa-solid", "fa-arrow-right");
-
-      if (pageNumber === "Previous") {
-        arrowElement.classList.add("prev");
-      } else if (pageNumber === "Next") {
-        arrowElement.classList.add("next");
-      }
-
-      pageButton.appendChild(arrowElement);
-    } else {
-      pageButton.textContent = pageNumber;
-    }
-
-    pageButton.classList.add("page-button");
-
-    if (pageNumber === currentPage) {
-      pageButton.classList.add("active");
-    }
-
-    return pageButton;
-  }
-
-  // Botão "Previous"
-  if (currentPage > 1) {
-    const prevButton = createPageButton("", true);
-    prevButton.innerHTML = "<i class='fa-solid fa-arrow-left'></i>";
-    prevButton.addEventListener("click", function () {
-      currentPage--;
-      drawCards();
-      updatePagination(totalCards);
-    });
-    pagination.appendChild(prevButton);
-  }
-
-  // Criação dos botões de paginação
-  for (let i = 1; i <= totalPages; i++) {
-    const pageButton = createPageButton(i, false);
-    pageButton.addEventListener("click", function () {
-      currentPage = i;
-      drawCards();
-      updatePagination(totalCards);
-    });
-    pagination.appendChild(pageButton);
-  }
-
-  // Botão "Next"
-  if (currentPage < totalPages) {
-    const nextButton = createPageButton("", true);
-    nextButton.innerHTML = "<i class='fa-solid fa-arrow-right'></i>";
-    nextButton.addEventListener("click", function () {
-      currentPage++;
-      drawCards();
-      updatePagination(totalCards);
-    });
-    pagination.appendChild(nextButton);
-  }
-}
-
-// Função para atualizar o número de cards por página
-function updateCardsPerPage(value) {
-  cardsPerPage = parseInt(value);
-  currentPage = 1; // Reset the current page to the first page
-  drawCards();
-  updatePagination(totalCards);
-}
-
-// Example code for changing the cards per page
-function changeCardsPerPage() {
-  const select = document.getElementById("selectCardsPerPage");
-  const selectedValue = select.value;
-  cardsPerPage = parseInt(selectedValue);
-  currentPage = 1;
-  drawCards();
-  updatePagination(totalCards);
-}
-
-// Função auxiliar para criar botões de páginação
-function createPageButton(text) {
-  const pageButton = document.createElement("span");
-  pageButton.textContent = text;
-  pageButton.classList.add("page-button");
-  return pageButton;
-}
 
 
 
