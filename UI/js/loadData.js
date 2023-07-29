@@ -6,6 +6,7 @@ async function iniData() {
     await getCart();
     await listCategory();
     await printData();
+    await updateCart();
     await printCart();
     await drawTop5();
     showUser();
@@ -107,7 +108,7 @@ async function printData() {
                <div class="info-card">
                <div class="button-container">
                <h4>${course.Curso}</h4>
-               <i class="heartIcon ${isFavorite?"fas red-heart":"far"} fa-heart" onclick="updateFavorites(${course.ISBN}); printData();"></i>
+               <i class="heartIcon ${isFavorite?"fas red-heart":"far"} fa-heart" onclick="updateFavorites(${course.ISBN}); printData(); "></i>
                </div>   
                <p>${course.Autor}</p>
                    <img src="img/estrelas.png">
@@ -127,6 +128,42 @@ async function printData() {
   });
 
 }
+
+
+/* Favoritos */
+async function getFav() {
+  let gUser = getUserId();
+  if (gUser === null) return alert("Não está logado");
+  let userID = "?Cliente_id=" + gUser.toString();
+  let fav = await getAPI("GetFavoritos", userID);
+  if (fav === null) fav = [];
+  return fav;
+}
+
+async function updateFavorites(isbn) {
+  let fav = await getFav();
+  let matchingFavIndex = fav.findIndex((favItem) => favItem.ISBN === isbn);
+  let gUser = getUserId(); 
+  if (gUser === -1) return alert("Não está logado");
+  let favItem = {
+      UserID: gUser.toString(),
+      ISBN: isbn.toString()
+  };
+
+  if (matchingFavIndex !== -1) {
+      // O item já existe nos favoritos
+      fav.splice(matchingFavIndex, 1); // Remove o item dos favoritos
+  } else {
+      // O item não existe nos favoritos, adicione-o
+      fav.push(favItem);
+  }
+
+  await postAPI("SetFavoritos", favItem);
+
+  // Atualize a exibição dos favoritos
+  printData();
+}
+
 
 /* FILTRO  */
 // Implement search functionality
@@ -205,53 +242,52 @@ async function getCart() {
     if (cart === null) cart = [];
     return cart;
 }
-
 async function printCart() {
+  const cartItems = await getCart();
 
-    const cartItems = await getCart();
-    const cartItemCount = cartItems.reduce(
-        (total, item) => total + parseInt(item.Quantidade),
-        0
-    );
-    const cartItemCountElement = document.getElementById("cartItemCount");
-    cartItemCountElement.textContent = cartItemCount;
+  const cartItemCount = cartItems.reduce(
+    (total, item) => total + parseInt(item.Quantidade),
+    0
+  );
+  const cartItemCountElement = document.getElementById("cartItemCount");
+  cartItemCountElement.textContent = cartItemCount;
 
-    let carDiv = document.getElementById("listCart");
-    carDiv.innerHTML = "";
-    let cartData = await getCart();
-    let allData = await getData();
-    console.log(cartData);
+  let carDiv = document.getElementById("listCart");
+  carDiv.innerHTML = "";
 
-    let cartItem = "";
+  let cartData = await getCart();
+  let allData = await getData();
+  console.log(cartData);
 
-    for (let i = 0; i < cartData.length; i++) {
-        let cart = cartData[i];
-        let matchingData = allData.find(data => data.ISBN === cart.ISBN);
+  let cartItem = "";
 
-        if (matchingData) {
-            // Use the 'matchingData' object to display the cart item
-            cartItem += `
-            <tr id="${matchingData.ISBN}">
-                <td><img width="80px" src="img/${matchingData.FotoCapa}" alt="Product Image" class="product-image"></td>
-                <td>${matchingData.Curso}</td>
-                <td>${matchingData.Preço.toString()}€</td>
-                <td >
-                    <a class="remove-product" onclick="addToCart(${matchingData.ISBN}, 'decrementar')">- </a>
-                    <span class="quantity">${cart.Quantidade}</span>
-                    <a class="remove-product" onclick="addToCart(${matchingData.ISBN}, 'incrementar')"> +</a>
-                </td>
-                <td><a onclick="removellFromCart(${matchingData.ISBN})" class="remove-product">Remove</a></td>
-            </tr>
-            `;
-        }
+  for (let i = 0; i < cartData.length; i++) {
+    let cart = cartData[i];
+    let matchingData = allData.find(data => data.ISBN === cart.ISBN);
+
+    if (matchingData) {
+      cartItem += `
+      <tr id="${matchingData.ISBN}">
+          <td><img width="80px" src="img/${matchingData.FotoCapa}" alt="Product Image" class="product-image"></td>
+          <td>${matchingData.Curso}</td>
+          <td>${matchingData.Preço.toString()}€</td>
+          <td >
+              <a class="remove-product" onclick="addToCart(${matchingData.ISBN}, 'decrementar')">- </a>
+              <span class="quantity">${cart.Quantidade}</span>
+              <a class="remove-product" onclick="addToCart(${matchingData.ISBN}, 'incrementar')"> +</a>
+          </td>
+          <td><a onclick="removellFromCart(${matchingData.ISBN})" class="remove-product">Remove</a></td>
+      </tr>
+      `;
     }
-    carDiv.innerHTML += cartItem;
+  }
+  carDiv.innerHTML += cartItem;
 }
 
 async function addToCart(isbn, tipo = null) {
   let cart = await getCart();
   let matchingCartIndex = cart.findIndex((cartItem) => cartItem.ISBN === isbn);
- let gUser = getUserId();
+  let gUser = getUserId();
   if (gUser === -1) {  alert("Não está logado"); return;}
   //Código a seguir só será executado se o usuário estiver logado
 
@@ -336,41 +372,6 @@ async function finalizar() {
 }
 
 /* ---------------------------- */
-
-/* Favoritos */
-async function getFav() {
-    let gUser = getUserId();
-    if (gUser === null) return alert("Não está logado");
-    let userID = "?Cliente_id=" + gUser.toString();
-    let fav = await getAPI("GetFavoritos", userID);
-    if (fav === null) fav = [];
-    return fav;
-}
-
-async function updateFavorites(isbn) {
-    let fav = await getFav();
-    let matchingFavIndex = fav.findIndex((favItem) => favItem.ISBN === isbn);
-    let gUser = getUserId();
-    if (gUser === null) return alert("Não está logado");
-
-    let favItem = {
-        UserID: gUser.toString(),
-        ISBN: isbn.toString()
-    };
-
-    if (matchingFavIndex !== -1) {
-        // O item já existe nos favoritos
-        fav.splice(matchingFavIndex, 1); // Remove o item dos favoritos
-    } else {
-        // O item não existe nos favoritos, adicione-o
-        fav.push(favItem);
-    }
-
-    await postAPI("SetFavoritos", favItem);
-
-    // Atualize a exibição dos favoritos
-    printData();
-}
 
 /* TOP 5 */
 

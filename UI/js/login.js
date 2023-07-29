@@ -7,7 +7,19 @@ function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
 
+async function updateCart() {
+  let gUser = getUserId();
+  if (gUser === -1) { return; }
 
+  // Get the current cart from the server
+  const cart = await getCart();
+
+  // Update the cart display
+  printCart(cart);
+  
+  // Update the data display
+  await printData();
+}
 
 // Evento de envio do formulário de login
 document.getElementById("loginForm").addEventListener("submit", async function(event) {
@@ -27,7 +39,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
       // Se o login for bem-sucedido, guardar os dados no localStorage
       localStorage.setItem("user", JSON.stringify(result.ds.Table));
       showUser();
-      await printData()
+      updateCart();
       closeForm();
       scrollToTop();
     } else {
