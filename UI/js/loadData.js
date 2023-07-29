@@ -128,12 +128,9 @@ async function printData() {
   });
 
 }
-
-
 /* Favoritos */
 async function getFav() {
   let gUser = getUserId();
-  if (gUser === null) return alert("Não está logado");
   let userID = "?Cliente_id=" + gUser.toString();
   let fav = await getAPI("GetFavoritos", userID);
   if (fav === null) fav = [];
@@ -164,7 +161,6 @@ async function updateFavorites(isbn) {
   printData();
 }
 
-
 /* FILTRO  */
 // Implement search functionality
 async function searchResults() {
@@ -176,18 +172,19 @@ async function searchResults() {
       let allData = await getData();
       const filteredCourses = allData.filter((course) => {
         return (
-          (searchText == "" || course.titulo.toLowerCase().includes(searchText)) &&
-          (searchSelect == "" || searchSelect == course.categoria) &&
+          (searchText == "" || course.Curso.toLowerCase().includes(searchText)) &&
+          (searchSelect == "" || searchSelect == course.Categoria) &&
           (toggleSwt == false || favorites.some((obj) => obj.ISBN === course.ISBN))
         );
       });
-  
+        
       return filteredCourses;
     } catch (error) {
       console.error("Error fetching data:", error);
       return []; // Retorna um array vazio para evitar mais erros em caso de falha
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
     let buscador = document.getElementById("buscador");
@@ -206,6 +203,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* ------------------------------ */
 
+
+/////////////////////////// Filtrar por categorias ///////////////////////////
+// listar as categorias do curso
 async function listCategory() {
     const catgSelect = document.getElementById("filtroCategoria");
     const allData = await getData();    
@@ -219,14 +219,14 @@ async function listCategory() {
   
     // Obter todos as categorias únicos da base de dados
     const filtrarUnico = [
-      ...new Set(allData.map((course) => course.categoria)),
+      ...new Set(allData.map((course) => course.Categoria)),
     ];
   
     // Criar uma opção para cada categoria e adicioná-las ao campo de seleção
-    filtrarUnico.forEach((categoria) => {
+    filtrarUnico.forEach((Categoria) => {
       const option = document.createElement("option");
-      option.value = categoria;
-      option.textContent = categoria;
+      option.value = Categoria;
+      option.textContent = Categoria;
       catgSelect.appendChild(option);
     });
   }
