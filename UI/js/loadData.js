@@ -125,8 +125,8 @@ async function printData() {
                </div>
  
                    <p id="ratingValue">Avaliação: ${course.Avaliação}</p><br>
-                   <p class="preco"> <p>${soldText}</p>
-
+                   <p class="preco"> <p>${soldText}</p><br>
+                   
                    <p class="preco">                   
                    <span class="u-pull-right ">${course.Preço.toString()}€</span>                   
                    <p class="promocao">${course.Promoção.toString()} 
@@ -300,6 +300,10 @@ async function getCart() {
   return cart;
 }
 
+let total = document.getElementById('total');
+let subTotal = document.getElementById('subTotal');
+let IVA = document.getElementById('iva');
+let Disconto = document.getElementById('discount');
 
 
 async function printCart() {
@@ -320,35 +324,47 @@ async function printCart() {
   let allData = await getData();
 
   let cartItem = "";
-  let totalPrice = 0;  // Move totalPrice initialization here
-  let count = 0;
+ let totalPrice = 0;
+let totalWithDiscount = 0;
+let ivaTotal = 0;  // Change variable name to ivaTotal
+let discountTotal = 0;  // Change variable name to discountTotal
 
-  for (let i = 0; i < cartData.length; i++) {
-    let cart = cartData[i];
-    let matchingData = allData.find(data => data.ISBN === cart.ISBN);
+for (let i = 0; i < cartData.length; i++) {
+  let cart = cartData[i];
+  let matchingData = allData.find(data => data.ISBN === cart.ISBN);
 
-    if (matchingData) {
-      cartItem += `
-      <tr id="${matchingData.ISBN}">
-          <td><img width="80px" src="img/${matchingData.FotoCapa}" alt="Product Image" class="product-image"></td>
-          <td>${matchingData.Curso}</td>
-          <td>${matchingData.Preço.toString()}€</td>
-          <td >
-              <a class="remove-product" onclick="addToCart(${matchingData.ISBN}, 'decrementar')">- </a>
-              <span class="quantity">${cart.Quantidade}</span>
-              <a class="remove-product" onclick="addToCart(${matchingData.ISBN}, 'incrementar')"> +</a>
-          </td>
-          <td><a onclick="removellFromCart(${matchingData.ISBN})" class="remove-product">Remove</a></td>
-      </tr>
-      `;
-      totalPrice += matchingData.Preço * cart.Quantidade;  // Calculate total price here
-      count += cart.Quantidade;
-    }
+  if (matchingData) {
+    cartItem += `
+    <tr id="${matchingData.ISBN}">
+        <td><img width="80px" src="img/${matchingData.FotoCapa}" alt="Product Image" class="product-image"></td>
+        <td>${matchingData.Curso}</td>
+        <td>${matchingData.Preço.toString()}€</td>
+        <td>
+            <a class="remove-product" onclick="addToCart(${matchingData.ISBN}, 'decrementar')">- </a>
+            <span class="quantity">${cart.Quantidade}</span>
+            <a class="remove-product" onclick="addToCart(${matchingData.ISBN}, 'incrementar')"> +</a>
+        </td>
+        <td><a onclick="removellFromCart(${matchingData.ISBN})" class="remove-product">Remove</a></td>
+    </tr>
+    `;
+    let totalItemPrice = matchingData.Preço * parseInt(cart.Quantidade, 10);  // Calculate total item price here, convert quantity to integer
+    let discount = matchingData.Percentagem ? totalItemPrice * parseFloat(matchingData.Percentagem / 100) : 0;  // Convert discount to number
+    let iva = totalItemPrice * 0.03;  // Calculate IVA here      
+    totalPrice += totalItemPrice;
+    totalWithDiscount += totalItemPrice - discount - iva;
+    ivaTotal += iva;  // Accumulate iva for each item
+    discountTotal += discount;  // Accumulate discount for each item
   }
-  carDiv.innerHTML += cartItem;
-  total.innerText = totalPrice.toLocaleString();  // Update total price on page
-  quantity.innerText = count;
 }
+
+carDiv.innerHTML += cartItem;
+total.innerText = totalPrice.toFixed(2);
+subTotal.innerText = totalWithDiscount.toFixed(2);
+IVA.innerText = "-" + ivaTotal.toFixed(2);
+Disconto.innerText = "-" + discountTotal.toFixed(2);
+ 
+}
+
 
 
 
@@ -387,7 +403,7 @@ async function addToCart(isbn, tipo = null) {
   printCart();
 }
 
-let total = document.querySelector('.total');
+
 
 
 async function removellFromCart(isbn) {

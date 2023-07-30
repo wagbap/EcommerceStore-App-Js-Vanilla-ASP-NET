@@ -47,14 +47,22 @@
                             </tbody>
                             <tfoot>
                               <tr class="checkOut">
-                                <td colspan="4"><b>Total</b></td>
-                                <td class="total">0</td>
+                                  <td colspan="4"><b>Sub-Total</b></td>
+                                  <td id="total">0</td>
                               </tr>
                               <tr class="checkOut">
-                                <td colspan="4"><b>Total</b></td>
-                                <td class="total">0</td>
+                                  <td colspan="4"><b>Desconto</b></td>
+                                  <td id="discount">0</td>
                               </tr>
-                             </tfoot>
+                              <tr class="checkOut">
+                                  <td colspan="4"><b>IVA</b></td>
+                                  <td id="iva">0</td>
+                              </tr>
+                              <tr class="checkOut">
+                                  <td colspan="4"><b>Total</b></td>
+                                  <td id="subTotal">0</td>
+                              </tr>
+                          </tfoot>
                         </table>
                         <a onclick="clearCart()" id="limpar-carrinho" class="button u-full-width">Esvaziar Carrinho</a>
                         <a id="finalizarCompra" class="button u-full-width" onclick="finalizar()">Finalizar Compra</a>
