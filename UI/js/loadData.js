@@ -125,8 +125,13 @@ async function printData() {
                </div>
  
                    <p id="ratingValue">Avaliação: ${course.Avaliação}</p><br>
-                   <p class="preco"> <p>${soldText}</p><br>
-                   <p class="preco">${course.Preço.toString()}€ <span class="u-pull-right ">${course.Percentagem.toString()}€</span></p>
+                   <p class="preco"> <p>${soldText}</p>
+
+                   <p class="preco">                   
+                   <span class="u-pull-right ">${course.Preço.toString()}€</span>                   
+                   <p class="promocao">${course.Promoção.toString()} 
+                   <span style="color: orange; font-size: 16px">-${course.Percentagem}%</span>
+                   </p>
           
                    <div class="button-container">  
                    <a onclick="addToCart(${course.ISBN}, 'new')" class="u-full-width button-primary button input adicionar-carrinho">Carrinho</a>
@@ -294,6 +299,9 @@ async function getCart() {
   if (cart === null) cart = [];
   return cart;
 }
+
+
+
 async function printCart() {
   const cartItems = await getCart();
 
@@ -301,6 +309,7 @@ async function printCart() {
     (total, item) => total + parseInt(item.Quantidade),
     0
   );
+
   const cartItemCountElement = document.getElementById("cartItemCount");
   cartItemCountElement.textContent = cartItemCount;
 
@@ -309,9 +318,10 @@ async function printCart() {
 
   let cartData = await getCart();
   let allData = await getData();
-  console.log(cartData);
 
   let cartItem = "";
+  let totalPrice = 0;  // Move totalPrice initialization here
+  let count = 0;
 
   for (let i = 0; i < cartData.length; i++) {
     let cart = cartData[i];
@@ -331,10 +341,16 @@ async function printCart() {
           <td><a onclick="removellFromCart(${matchingData.ISBN})" class="remove-product">Remove</a></td>
       </tr>
       `;
+      totalPrice += matchingData.Preço * cart.Quantidade;  // Calculate total price here
+      count += cart.Quantidade;
     }
   }
   carDiv.innerHTML += cartItem;
+  total.innerText = totalPrice.toLocaleString();  // Update total price on page
+  quantity.innerText = count;
 }
+
+
 
 async function addToCart(isbn, tipo = null) {
   let cart = await getCart();
@@ -371,6 +387,7 @@ async function addToCart(isbn, tipo = null) {
   printCart();
 }
 
+let total = document.querySelector('.total');
 
 
 async function removellFromCart(isbn) {

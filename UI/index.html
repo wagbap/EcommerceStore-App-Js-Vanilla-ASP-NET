@@ -45,6 +45,16 @@
                             </thead>
                             <tbody id="listCart">
                             </tbody>
+                            <tfoot>
+                              <tr class="checkOut">
+                                <td colspan="4"><b>Total</b></td>
+                                <td class="total">0</td>
+                              </tr>
+                              <tr class="checkOut">
+                                <td colspan="4"><b>Total</b></td>
+                                <td class="total">0</td>
+                              </tr>
+                             </tfoot>
                         </table>
                         <a onclick="clearCart()" id="limpar-carrinho" class="button u-full-width">Esvaziar Carrinho</a>
                         <a id="finalizarCompra" class="button u-full-width" onclick="finalizar()">Finalizar Compra</a>
@@ -204,7 +214,7 @@
         </div>
 
         <div class="input-container">
-          <input type="submit"  value="Registrar">
+         <button type="submit" style="width:80%" >Registrar</buttton>
         </div>
       </form>
     </div>
@@ -250,7 +260,7 @@
                           <a class="lnk" href="#">Ofertas de Emprego</a>
                           <a class="lnk" href="#">Blog</a>
                           <a id="login" style="width:100px;" type="button"  onclick="openForm()"  class="open-button" >Login</a>
-                          <a id="logout" style="background-color: red;" type="button"  onclick="logout()"  class="open-button" >Logout</a>
+                          <a id="logout" style="background-color: red;width:100px;"  type="button"  onclick="logout()"  class="open-button" >Logout</a>
                           <a type="button" style="width:100px;" id="openRegisterFormButton" class="open-button">Registrar</a>
 
               
