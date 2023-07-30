@@ -553,3 +553,140 @@ body {
   opacity: 1;
   color: #fff !important;
 }
+
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  border-radius: 20px;
+  background-color: red;
+}
+
+#sliderRound {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+
+
+.swiper-wrapper {
+  display: flex; /* Faz com que os filhos (swiper-slide) sejam exibidos lado a lado */
+}
+
+.swiper-slide {
+  flex: 0 0 auto; /* Evita que os slides se estiquem para preencher o contêiner */
+}
+
+.swiper-wrapper {
+  display: flex;
+  gap: 20px; /* Adiciona espaço entre os cards */
+}
+
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-container div {
+  flex: 1;
+  margin-right: 50px;
+}
+
+.input-container div:last-child {
+  margin-right: 20px;
+}
+
+
+/* Estilo para o modal - fundo preto com opacidade */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Estilo para o modal - caixa de conteúdo */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 10px;
+  /* Diminuído para 10px */
+  border: 1px solid #888;
+  width: 40%;
+  /* Alterado para 40% */
+  animation-name: animateModal;
+  animation-duration: 0.4s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-content .input-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  /* Diminuído para 10px */
+}
+
+.modal-content label,
+.modal-content input {
+  width: 65%;
+}
+
+.modal-content input[type="submit"] {
+  width: 100%;
+  padding: 5px;
+  /* Diminuído para 5px */
+}
+
+/* Animação para abrir o modal */
+@keyframes animateModal {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+/* Estilo para o botão fechar */
+.close {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  color: #aaaaaa;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+

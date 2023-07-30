@@ -2,54 +2,54 @@
 onload = iniData;
 
 async function iniData() {
-    getUserId();
-    await getCart();
-    await listCategory();
-    await printData();  
-    await updateCart();
-    await printCart();
-    await drawTop5();
-    showUser();
-    toggleSwitchHandler();
-    swiperJs();
-    verificarAtivoCardInfo();
+  getUserId();
+  await getCart();
+  await listCategory();
+  await printData();
+  await updateCart();
+  await printCart();
+  await drawTop5();
+  showUser();
+  toggleSwitchHandler();
+  swiperJs();
+  verificarAtivoCardInfo();
 }
 
 /* ---------------------------- */
 /* APIs */
 
 async function getAPI(url, data = null) {
-    let apiUrl = "https://localhost:44332/" + url;
-    
-    if (data !== null) {
-        apiUrl += data;
-    }
+  let apiUrl = "https://localhost:44332/" + url;
 
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            mode: 'cors'
-        });
+  if (data !== null) {
+    apiUrl += data;
+  }
 
-        const result = await response.json();
-        if (result === null) return [];
-        return result;
-    } catch (error) {
-        console.error("Error fetching data:", error);
-        return []; // Retorna uma resposta vazia em caso de erro
-    }
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      mode: 'cors'
+    });
+
+    const result = await response.json();
+    if (result === null) return [];
+    return result;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return []; // Retorna uma resposta vazia em caso de erro
+  }
 }
 
 async function postAPI(url, objData) {
-    const response = await fetch("https://localhost:44332/" + url, {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(objData), // Verifique esta linha
-    });
+  const response = await fetch("https://localhost:44332/" + url, {
+    method: 'POST',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(objData), // Verifique esta linha
+  });
 
-    const data = await response.json();
-    return data;
+  const data = await response.json();
+  return data;
 }
 
 /* ---------------------------- */
@@ -57,20 +57,20 @@ async function postAPI(url, objData) {
 
 /* Get Cursos */
 async function getData() {
-    let allData = await getAPI("Cursos");
-    return allData;
+  let allData = await getAPI("Cursos");
+  return allData;
 }
 /* ---------------------------------- */
 
 async function printData() {
 
   const soldCourses = await countSoldCourses();
-  
-    const cartItems = await getCart();
-    const cartItemCount = cartItems.reduce(
-        (total, item) => total + parseInt(item.Quantidade),
-        0
-    );
+
+  const cartItems = await getCart();
+  const cartItemCount = cartItems.reduce(
+    (total, item) => total + parseInt(item.Quantidade),
+    0
+  );
 
   const cartItemCountElement = document.getElementById("cartItemCount");
   cartItemCountElement.textContent = cartItemCount;
@@ -99,15 +99,15 @@ async function printData() {
       currentRow.className = "row";
       container.appendChild(currentRow);
 
-    }   
+    }
 
 
     // Verificar se o item está nos favoritos
     const isFavorite = favorites.some((obj) => obj.ISBN === course.ISBN);
 
     // Obter a quantidade vendida do curso
-		const soldCount = soldCourses[course.ISBN];
-		const soldText = soldCount ? `${soldCount.quantity} Vendidos` : "";
+    const soldCount = soldCourses[course.ISBN];
+    const soldText = soldCount ? `${soldCount.quantity} Vendidos` : "";
 
 
     currentRow.innerHTML += `
@@ -117,7 +117,7 @@ async function printData() {
                <div class="info-card">
                <div class="button-container">
                <h4>${course.Curso}</h4>
-               <i class="heartIcon ${isFavorite?"fas red-heart":"far"} fa-heart" onclick="updateFavorites(${course.ISBN}); printData(); "></i>
+               <i class="heartIcon ${isFavorite ? "fas red-heart" : "far"} fa-heart" onclick="updateFavorites(${course.ISBN}); printData(); "></i>
                </div>   
                <p>${course.Autor}</p>
                    <img src="img/estrelas.png">
@@ -135,9 +135,9 @@ async function printData() {
        `;
   });
 
-  
-	// Atualizar a exibição da paginação
-	updatePagination(filteredCourses.length);
+
+  // Atualizar a exibição da paginação
+  updatePagination(filteredCourses.length);
 
 }
 /* Favoritos */
@@ -152,19 +152,19 @@ async function getFav() {
 async function updateFavorites(isbn) {
   let fav = await getFav();
   let matchingFavIndex = fav.findIndex((favItem) => favItem.ISBN === isbn);
-  let gUser = getUserId(); 
+  let gUser = getUserId();
   if (gUser === -1) return alert("Não está logado");
   let favItem = {
-      UserID: gUser.toString(),
-      ISBN: isbn.toString()
+    UserID: gUser.toString(),
+    ISBN: isbn.toString()
   };
 
   if (matchingFavIndex !== -1) {
-      // O item já existe nos favoritos
-      fav.splice(matchingFavIndex, 1); // Remove o item dos favoritos
+    // O item já existe nos favoritos
+    fav.splice(matchingFavIndex, 1); // Remove o item dos favoritos
   } else {
-      // O item não existe nos favoritos, adicione-o
-      fav.push(favItem);
+    // O item não existe nos favoritos, adicione-o
+    fav.push(favItem);
   }
 
   await postAPI("SetFavoritos", favItem);
@@ -176,41 +176,41 @@ async function updateFavorites(isbn) {
 /* FILTRO  */
 // Implement search functionality
 async function searchResults() {
-    try {
-      const searchText = document.getElementById("buscador").value.toLowerCase();
-      const searchSelect = document.getElementById("filtroCategoria").value;
-      const toggleSwt = document.getElementById("toggleSwitch").checked;
-      let favorites = await getFav();
-      let allData = await getData();
-      const filteredCourses = allData.filter((course) => {
-        return (
-          (searchText == "" || course.Curso.toLowerCase().includes(searchText)) &&
-          (searchSelect == "" || searchSelect == course.Categoria) &&
-          (toggleSwt == false || favorites.some((obj) => obj.ISBN === course.ISBN))
-        );
-      });
-        
-      return filteredCourses;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      return []; // Retorna um array vazio para evitar mais erros em caso de falha
-    }
+  try {
+    const searchText = document.getElementById("buscador").value.toLowerCase();
+    const searchSelect = document.getElementById("filtroCategoria").value;
+    const toggleSwt = document.getElementById("toggleSwitch").checked;
+    let favorites = await getFav();
+    let allData = await getData();
+    const filteredCourses = allData.filter((course) => {
+      return (
+        (searchText == "" || course.Curso.toLowerCase().includes(searchText)) &&
+        (searchSelect == "" || searchSelect == course.Categoria) &&
+        (toggleSwt == false || favorites.some((obj) => obj.ISBN === course.ISBN))
+      );
+    });
+
+    return filteredCourses;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return []; // Retorna um array vazio para evitar mais erros em caso de falha
+  }
 }
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    let buscador = document.getElementById("buscador");
-  
-    if (buscador) {
-      buscador.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          printData(); // Chama a para executar a pesquisa
-        }
-      });
-    } else {
-      console.error("Elemento buscador não encontrado.");
-    }
+  let buscador = document.getElementById("buscador");
+
+  if (buscador) {
+    buscador.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        printData(); // Chama a para executar a pesquisa
+      }
+    });
+  } else {
+    console.error("Elemento buscador não encontrado.");
+  }
 });
 
 /* ------------------------------ */
@@ -219,40 +219,40 @@ document.addEventListener("DOMContentLoaded", function () {
 /////////////////////////// Filtrar por categorias ///////////////////////////
 // listar as categorias do curso
 async function listCategory() {
-    const catgSelect = document.getElementById("filtroCategoria");
-    const allData = await getData();    
-    catgSelect.innerHTML = "";
-  
-    // Adicionar a opção padrão
-    const defaultOption = document.createElement("option");
-    defaultOption.value = "";
-    defaultOption.textContent = "Selecionar";
-    catgSelect.appendChild(defaultOption);
-  
-    // Obter todos as categorias únicos da base de dados
-    const filtrarUnico = [
-      ...new Set(allData.map((course) => course.Categoria)),
-    ];
-  
-    // Criar uma opção para cada categoria e adicioná-las ao campo de seleção
-    filtrarUnico.forEach((Categoria) => {
-      const option = document.createElement("option");
-      option.value = Categoria;
-      option.textContent = Categoria;
-      catgSelect.appendChild(option);
-    });
-  }
+  const catgSelect = document.getElementById("filtroCategoria");
+  const allData = await getData();
+  catgSelect.innerHTML = "";
+
+  // Adicionar a opção padrão
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "Selecionar";
+  catgSelect.appendChild(defaultOption);
+
+  // Obter todos as categorias únicos da base de dados
+  const filtrarUnico = [
+    ...new Set(allData.map((course) => course.Categoria)),
+  ];
+
+  // Criar uma opção para cada categoria e adicioná-las ao campo de seleção
+  filtrarUnico.forEach((Categoria) => {
+    const option = document.createElement("option");
+    option.value = Categoria;
+    option.textContent = Categoria;
+    catgSelect.appendChild(option);
+  });
+}
 
 /* ---------------------------- */
 
 /*lista carinho com API */
 async function getCart() {
-    let gUser = getUserId();
-    if (gUser === null) return alert("Não está logado");
-    let userID = "?Cliente_id=" + gUser.toString();
-    let cart = await getAPI("GetCarinho", userID);
-    if (cart === null) cart = [];
-    return cart;
+  let gUser = getUserId();
+  if (gUser === null) return alert("Não está logado");
+  let userID = "?Cliente_id=" + gUser.toString();
+  let cart = await getAPI("GetCarinho", userID);
+  if (cart === null) cart = [];
+  return cart;
 }
 async function printCart() {
   const cartItems = await getCart();
@@ -300,29 +300,29 @@ async function addToCart(isbn, tipo = null) {
   let cart = await getCart();
   let matchingCartIndex = cart.findIndex((cartItem) => cartItem.ISBN === isbn);
   let gUser = getUserId();
-  if (gUser === -1) {  alert("Não está logado"); return;}
+  if (gUser === -1) { alert("Não está logado"); return; }
   //Código a seguir só será executado se o usuário estiver logado
 
   let cartItem = {
-      UserID: gUser.toString(),
-      ISBN: isbn.toString(),
-      Quantidade: 1, // Define o valor padrão da quantidade como 1
-      Total: 0
+    UserID: gUser.toString(),
+    ISBN: isbn.toString(),
+    Quantidade: 1, // Define o valor padrão da quantidade como 1
+    Total: 0
   };
 
   if (matchingCartIndex !== -1) {
-      if (tipo === "incrementar") {
-          cartItem.Quantidade = cart[matchingCartIndex].Quantidade + 1;
-      } else if (tipo === "decrementar") {
-          cartItem.Quantidade = cart[matchingCartIndex].Quantidade - 1;
-      }else if (tipo === "new") {
-          cartItem.Quantidade = cart[matchingCartIndex].Quantidade + 1;
-      }else if (tipo === "incrementar" && cart[matchingCartIndex].Quantidade === 0 || tipo === "decrementar" && cart[matchingCartIndex].Quantidade === 0) {
-          removellFromCart(isbn);
-      }
+    if (tipo === "incrementar") {
+      cartItem.Quantidade = cart[matchingCartIndex].Quantidade + 1;
+    } else if (tipo === "decrementar") {
+      cartItem.Quantidade = cart[matchingCartIndex].Quantidade - 1;
+    } else if (tipo === "new") {
+      cartItem.Quantidade = cart[matchingCartIndex].Quantidade + 1;
+    } else if (tipo === "incrementar" && cart[matchingCartIndex].Quantidade === 0 || tipo === "decrementar" && cart[matchingCartIndex].Quantidade === 0) {
+      removellFromCart(isbn);
+    }
   } else {
-      // O item não existe no carrinho, adicione-o com quantidade 1
-      cart.push(cartItem);
+    // O item não existe no carrinho, adicione-o com quantidade 1
+    cart.push(cartItem);
   }
 
   await postAPI("SetCarinho", cartItem);
@@ -334,92 +334,93 @@ async function addToCart(isbn, tipo = null) {
 
 
 async function removellFromCart(isbn) {
-    let cart = await getCart();
-    let matchingCartIndex = cart.findIndex((cartItem) => cartItem.ISBN === isbn);
-    let gUser = getUserId();
-    if (gUser === null) return alert("Não está logado");
+  let cart = await getCart();
+  let matchingCartIndex = cart.findIndex((cartItem) => cartItem.ISBN === isbn);
+  let gUser = getUserId();
+  if (gUser === null) return alert("Não está logado");
 
-    let cartItem = {
-        UserID: gUser.toString(),
-        ISBN: isbn.toString(),
-        Quantidade: 0, // Define o valor padrão da quantidade como 1
-        Total: 1450
-    };
-    if (matchingCartIndex !== -1) {
-        // O item já existe no carrinho
-        cart.splice(matchingCartIndex, 1); // Remove o item do carrinho
-    }
-    await postAPI("SetCarinho", cartItem);
-    // Atualize a exibição do carrinho
-    printCart();
-    loadCartData();
+  let cartItem = {
+    UserID: gUser.toString(),
+    ISBN: isbn.toString(),
+    Quantidade: 0, // Define o valor padrão da quantidade como 1
+    Total: 1450
+  };
+  if (matchingCartIndex !== -1) {
+    // O item já existe no carrinho
+    cart.splice(matchingCartIndex, 1); // Remove o item do carrinho
+  }
+  await postAPI("SetCarinho", cartItem);
+  // Atualize a exibição do carrinho
+  printCart();
+  loadCartData();
 }
 
-async function clearCart(){
-    let gUser = getUserId();
-    if (gUser === null) return alert("Não está logado");
-    let UserID = "?user=" + gUser.toString();
-    await getAPI("ClearCart", UserID);
-    // Atualize a exibição do carrinho
-    printCart();
-    loadCartData();
+async function clearCart() {
+  let gUser = getUserId();
+  if (gUser === null) return alert("Não está logado");
+  let UserID = "?user=" + gUser.toString();
+  await getAPI("ClearCart", UserID);
+  // Atualize a exibição do carrinho
+  printCart();
+  loadCartData();
 }
 
 
 
 async function finalizar() {
   let gUser = getUserId();
-  if (gUser === -1) {  alert("Não está logado"); return;}
+  if (gUser === -1) { alert("Não está logado"); return; }
   //Código a seguir só será executado se o usuário estiver logado
-    let userID = "?userID=" + gUser.toString();
-    let result = await getAPI("Finalizar", userID);
-    if (result == 1){
-        printCart();
-        printData();
-        drawTop5();
-        alert("Compra finalizada com sucesso!");
-    }else{
-        alert("Erro ao finalizar a compra!");
-    }
+  let userID = "?userID=" + gUser.toString();
+  let result = await getAPI("Finalizar", userID);
+  if (result == 1) {
+    printCart();
+    printData();
+    drawTop5();
+    alert("Compra finalizada com sucesso!");
+  } else {
+    alert("Erro ao finalizar a compra!");
+  }
 }
 
 /* Contar os vendidos */
-async function getSoldItems() { 
-	const response = await fetch('https://localhost:44332/GetSolds', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		}});
-	
-	const data = await response.json();
+async function getSoldItems() {
+  const response = await fetch('https://localhost:44332/GetSolds', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
 
-	if (data == null) {
-		data = [];
-	}
+  const data = await response.json();
 
-	return data;
+  if (data == null) {
+    data = [];
+  }
+
+  return data;
 }
 
 // count sold courses
 async function countSoldCourses() {
-	const soldCourses = await getSoldItems();
-	const allData = await getData();
-	const soldCount = {};
+  const soldCourses = await getSoldItems();
+  const allData = await getData();
+  const soldCount = {};
 
-	soldCourses.forEach((item) => {
-		const course = allData.find((c) => c.ISBN === item.ISBN);
-		if (course) {
-			if (!soldCount[course.ISBN]) {
-				soldCount[course.ISBN] = {
-					course: course,
-					quantity: 0,
-				};
-			}
-			soldCount[course.ISBN].quantity += item.Quantidade;  // Ajuste aqui para item.Quantidade
-		}
-	});
+  soldCourses.forEach((item) => {
+    const course = allData.find((c) => c.ISBN === item.ISBN);
+    if (course) {
+      if (!soldCount[course.ISBN]) {
+        soldCount[course.ISBN] = {
+          course: course,
+          quantity: 0,
+        };
+      }
+      soldCount[course.ISBN].quantity += item.Quantidade;  // Ajuste aqui para item.Quantidade
+    }
+  });
 
-	return soldCount;
+  return soldCount;
 }
 
 
@@ -428,25 +429,25 @@ async function countSoldCourses() {
 /* TOP 5 */
 //Função para desenhar cursos mais vendidos
 async function drawTop5() {
-    let sold5 = await getSoldItems();
-    let allData = await getData();
-    const container = document.getElementById("rightSideFixed");
-    container.innerHTML = "";
-  
-    //verificar top 5 mais vendido
-    sold5.sort((a, b) => b.quantity - a.quantity);
-  
-    const topFiveSoldCourses = sold5.slice(0, 5);
-  
-    html = `<h2>Top 5 Cursos Mais Vendidos</h2>
+  let sold5 = await getSoldItems();
+  let allData = await getData();
+  const container = document.getElementById("rightSideFixed");
+  container.innerHTML = "";
+
+  //verificar top 5 mais vendido
+  sold5.sort((a, b) => b.quantity - a.quantity);
+
+  const topFiveSoldCourses = sold5.slice(0, 5);
+
+  html = `<h2>Top 5 Cursos Mais Vendidos</h2>
     <ul class="book-list">`;
-  
-    topFiveSoldCourses.forEach((sold) => {
-      // Find the course with matching ISBN
-      const course = allData.find((c) => c.ISBN === sold.ISBN);
-  
-      if (course) {
-        html += `
+
+  topFiveSoldCourses.forEach((sold) => {
+    // Find the course with matching ISBN
+    const course = allData.find((c) => c.ISBN === sold.ISBN);
+
+    if (course) {
+      html += `
         <li class="book-item">
                   <img src="img/${course.FotoCapa}">
                   <div class="book-details">
@@ -460,14 +461,14 @@ async function drawTop5() {
                   </div>
                 </li>
         `;
-      }
-    });
-    html += `
+    }
+  });
+  html += `
     </ul>  
     `;
-  
-    container.innerHTML = html;
-  }
+
+  container.innerHTML = html;
+}
 
 
 
@@ -536,3 +537,95 @@ async function listarPorId(idTst) {
 }
 //////////////////////////////////////////////Swiper slider por Categoria/////////////////////////////////////////
 
+
+function openRegisterForm() {
+  document.getElementById("myRegisterModal").style.display = "block";
+  document.getElementById("openRegisterFormButton").style.display = "none";
+}
+
+function closeRegisterForm() {
+  document.getElementById("myRegisterModal").style.display = "none";
+  document.getElementById("openRegisterFormButton").style.display = "block";
+}
+
+var registerCloseBtn = document.getElementById("registerCloseButton");
+registerCloseBtn.onclick = function () {
+  closeRegisterForm();
+}
+
+document.getElementById('openRegisterFormButton').addEventListener('click', openRegisterForm);
+
+window.addEventListener('DOMContentLoaded', (event) => {
+
+
+  // Get the register modal
+  var registerModal = document.getElementById("myRegisterModal");
+
+  // Get the button that opens the register modal
+  var registerBtn = document.getElementById("openRegisterFormButton");
+
+  // Get the <span> elements that close the modals
+  var closeBtns = document.getElementsByClassName("close");
+
+  // When the user clicks the button, open the login modal 
+  loginBtn.onclick = function () {
+    loginModal.style.display = "block";
+  }
+
+  // When the user clicks the button, open the register modal 
+  registerBtn.onclick = function () {
+    registerModal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modals
+  for (var i = 0; i < closeBtns.length; i++) {
+    closeBtns[i].onclick = function () {
+      loginModal.style.display = "none";
+      registerModal.style.display = "none";
+    }
+  }
+
+  // When the user clicks anywhere outside of the modals, close them
+  window.onclick = function (event) {
+    if (event.target == loginModal) {
+      loginModal.style.display = "none";
+    } else if (event.target == registerModal) {
+      registerModal.style.display = "none";
+    }
+  }
+
+});
+
+
+document.getElementById('registerForm').addEventListener('submit', async (event) => {
+  event.preventDefault(); // Evitar que o formulário seja enviado pelo método padrão
+
+  // Coletar os dados do formulário
+  const userData = {
+    PrimeiroNome: document.getElementById('registerFirstName').value,
+    UltimoNome: document.getElementById('registerLastName').value, // Aqui você pode querer usar um campo separado para o último nome
+    Tipo: 1, // Você precisará ajustar isso com base no seu design de banco de dados
+    Estado: 1, // Você precisará ajustar isso com base no seu design de banco de dados
+    User: document.getElementById('registerUsername').value,
+    Password: document.getElementById('registerPassword').value
+  };
+
+  // Fazer uma requisição POST para a API
+  try {
+    const response = await fetch('https://localhost:44332/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData)
+    });
+    const data = await response.json();
+    // enter you logic when the fetch is successful
+    alert("User insert successful");
+    // Fecha o modal e limpa os campos do formulário
+    closeRegisterForm();
+    document.getElementById('registerForm').reset();
+  } catch (error) {
+    // enter your logic for when there is an error (ex. error toast)
+    alert(`Falha ao registrar usuário: ${error.message}`);
+  }
+
+});

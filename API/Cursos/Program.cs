@@ -39,6 +39,20 @@ app.UseCors("MyCorsProfile");
 
 
 
+app.MapPost("/register", (UserData userData) =>
+{
+    // Crie uma nova instância do objeto AutenticationAPI
+    var authApi = new AutenticationAPI();
+
+    // Use o método InsertUser para tentar inserir o usuário no banco de dados
+    bool isRegistered = authApi.InsertUser(userData);
+
+    // Retorne o resultado do registro
+    return isRegistered;
+});
+
+
+
 app.MapPost("/Login", (Prm_Login prmIn) =>
 {
     return Gateway.ExecuteLogin(prmIn);
@@ -327,3 +341,5 @@ public class LoginDT
     public string User { get; set; }
     public string Password { get; set; }
 }
+
+

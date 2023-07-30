@@ -75,7 +75,7 @@ window.addEventListener("resize", handleWindowResize);
 // desenhar slide
 async function listarSlide(idTst) {
   const allData = await getData();
-  const selectedCourse = await allData.find((course) => course.ISBN == idTst);
+  const selectedCourse = allData.find((course) => course.ISBN == idTst);
 
   if (selectedCourse) {
     const filteredCourses = allData.filter(
@@ -85,54 +85,77 @@ async function listarSlide(idTst) {
     const slideProd = document.getElementById("product-slide");
     slideProd.innerHTML = "";
 
-    if (filteredCourses.length > 0) { // Obter a contagem de cursos vendidos
-      const swiperSlides = filteredCourses.map((course) => {
+    if (filteredCourses.length > 0) {
+      const soldCourses = await countSoldCourses(); // Adiciona a palavra-chave "await"
+
+      let count = 0;
+      let swiperSlides = [];
+      let slideContainer = '';
+
+      filteredCourses.forEach((course) => {
         // Verificar se o ID do curso é igual ao ID selecionado
         if (course.ISBN == idTst) {
-          return ""; // Pular o curso, não incluir no slide
+          return; // Pular o curso, não incluir no slide
         }
 
-            const soldCourses =  countSoldCourses();
-    				// Obter a quantidade vendida do curso
-            const soldCount = soldCourses[course.ISBN];
-            const soldText = soldCount ? `${soldCount.quantity} Vendidos` : "";
+        // Obter a quantidade vendida do curso
+        const soldCount = soldCourses[course.ISBN];
+        const soldText = soldCount ? `${soldCount.quantity} Vendidos` : "";
 
-        return `
-      <div class="swiper-slide">
-        <div class="card" id="${course.ISBN}">
-          <img src="img/${course.FotoCapa}" class="imagen-curso u-full-width">
-          <div class="info-card">
-            <div class="button-container">
-              <h4>${course.Curso}</h4>
-            </div>   
-            <p>${course.Autor}</p>
-            <img src="img/estrelas.png" style="width:80px;">
-            <p class="preco"> <p>${soldText}</p></p><br>
-            <p class="preco"> <span class="u-pull-right">${course.Preço}€</span></p>
-            <div class="button-container">  
-              <a onclick="event.preventDefault(); addToCart(${course.ISBN}); drawCart();" href="#" class="u-full-width button-primary button input adicionar-carrinho" data-id="1"><i class="fa-solid fa-cart-plus"></i></a>
-              <a onclick="trocarDiv('cardInfo', 'swiperSlide'), listarPorId(${course.ISBN})"  class="button-danger button"><i class="fa-sharp fa-solid fa-plus"></i> </a>
+        // Increment the count
+        count++;
+
+        // Create a new slide container if count is 1
+        // Create a new slide container if count is 1
+        if (count === 1) {
+          slideContainer = `<div >`;
+        }
+
+
+        // Add the card to the slide container
+        slideContainer += `
+          <div class="card" id="${course.ISBN}">
+            <img src="img/${course.FotoCapa}" class="imagen-curso u-full-width">
+            <div class="info-card">
+              <div class="button-container">
+                <h4>${course.Curso}</h4>
+              </div>   
+              <p>${course.Autor}</p>
+              <img src="img/estrelas.png" style="width:80px;">
+              <p class="preco">${soldText}</p>
+              <p class="preco">${course.Preço}€</p>
+              <div class="button-container">  
+                <a onclick="event.preventDefault(); addToCart(${course.ISBN}); drawCart();" href="#" class="u-full-width button-primary button input adicionar-carrinho" data-id="1"><i class="fa-solid fa-cart-plus"></i></a>
+                <a onclick="trocarDiv('cardInfo', 'swiperSlide'), listarPorId(${course.ISBN})"  class="button-danger button"><i class="fa-sharp fa-solid fa-plus"></i> </a>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    `;
+        `;
+
+        // Close and add the slide container to the slides if count is 3 or if it's the last course
+        if (count === 3 || course === filteredCourses[filteredCourses.length - 1]) {
+          slideContainer += `</div>`;
+          swiperSlides.push(slideContainer);
+          // Reset the count
+          count = 0;
+        }
       });
+
       slideProd.innerHTML += `
-    <br />
-    <div class="container">
-      <div class="product-container">
-        <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            ${swiperSlides.join("")}
+      <br />
+      <div class="container">
+        <div class="product-container">
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              ${swiperSlides.join("")}
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
         </div>
       </div>
-    </div>
-  `;
+      `;
     } else {
       slideProd.innerHTML = "Nenhum curso encontrado com a mesma categoria.";
     }
@@ -142,6 +165,7 @@ async function listarSlide(idTst) {
     slideProd.innerHTML = "Nenhum curso encontrado com a mesma categoria.";
   }
 }
+
 
 
 /* PAGINAção */

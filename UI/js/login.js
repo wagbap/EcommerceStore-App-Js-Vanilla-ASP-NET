@@ -43,7 +43,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
       closeForm();
       scrollToTop();
     } else {
-      alert("Login falhado");
+      alert(result);
     }
   });
 
@@ -78,3 +78,4 @@ function getUserId() {
     }
     return -1;
 }
+

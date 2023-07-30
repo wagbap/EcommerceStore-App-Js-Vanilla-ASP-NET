@@ -169,6 +169,47 @@
     <i class="fas fa-arrow-up"></i>
     </a>
 
+  <!-- Modal de Registro -->
+  <div id="myRegisterModal" class="modal">
+    <!-- Conteúdo do Modal -->
+    <div class="modal-content">
+      <!-- Botão Fechar -->
+      <span id="registerCloseButton" class="close">&times;</span>
+      <!-- Formulário de Registro -->
+      <form id="registerForm">
+        <h2>Registro</h2>
+        <div class="input-container">
+          <div>
+            <label for="registerFirstName">Primeiro Nome:</label>
+            <input type="text" id="registerFirstName" name="firstname" required>
+          </div>
+          <div>
+            <label for="registerLastName">Último nome:</label>
+            <input type="text" id="registerLastName" name="lastname" required>
+          </div>
+        </div>
+
+
+        <div class="input-container">
+          <div>
+
+            <label for="registerUsername">Nome de usuário:</label>
+            <input type="text" id="registerUsername" name="username" required>
+
+          </div>
+          <div>
+            <label for="registerPassword">Senha:</label>
+            <input type="password" id="registerPassword" name="password" required>
+          </div>
+        </div>
+
+        <div class="input-container">
+          <input type="submit" value="Registrar">
+        </div>
+      </form>
+    </div>
+  </div>
+
 
     <div class="form-popup" id="myForm">
     <form id="loginForm" class="form-container">
@@ -210,6 +251,9 @@
                           <a class="lnk" href="#">Blog</a>
                           <a id="login" type="button"  onclick="openForm()"  class="open-button" >Login</a>
                           <a id="logout" style="background-color: red;" type="button"  onclick="logout()"  class="open-button" >Logout</a>
+                          <a type="button" style="width:100px;" id="openRegisterFormButton" class="open-button">Registrar</a>
+
+              
                       </nav>
                     </div>
             </div>
