@@ -120,7 +120,11 @@ async function printData() {
                <i class="heartIcon ${isFavorite ? "fas red-heart" : "far"} fa-heart" onclick="updateFavorites(${course.ISBN}); printData(); "></i>
                </div>   
                <p>${course.Autor}</p>
-                   <img src="img/estrelas.png">
+               <div id="ratingStars">
+               ${getRatingStars(course.Avaliação)}
+               </div>
+ 
+                   <p id="ratingValue">Avaliação: ${course.Avaliação}</p><br>
                    <p class="preco"> <p>${soldText}</p><br>
                    <p class="preco">${course.Preço.toString()}€ <span class="u-pull-right ">${course.Percentagem.toString()}€</span></p>
           
@@ -139,6 +143,42 @@ async function printData() {
   // Atualizar a exibição da paginação
   updatePagination(filteredCourses.length);
 
+}
+
+const ratingStars = document.querySelectorAll('.star');
+const ratingValue = document.getElementById('ratingValue');
+
+let rating = 0;
+
+ratingStars.forEach(star => {
+  star.addEventListener('click', () => {
+    rating = parseInt(star.dataset.rating);
+    updateRating();
+  });
+});
+
+function getRatingStars(rating) {
+  let stars = '';
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+      stars += `<span class="star" data-rating="${i}"> <img src="img/estrelas_um.png"></span>`;
+    } else {
+      stars += `<span class="star" data-rating="${i}"> <img src="img/estrelas_vazio.png"> </span>`;
+    }
+  }
+  return stars;
+}
+
+function updateRating() {
+  ratingValue.innerHTML = `Avaliação: `;
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+      ratingValue.innerHTML += `<span class="star" data-rating="${i}">&#9733;</span>`;
+    } else {
+      ratingValue.innerHTML += `<span class="star" data-rating="${i}">&#9734;</span>`;
+    }
+  }
+  // Aqui você pode enviar o valor da avaliação para a base de dados ou realizar outras ações com o valor.
 }
 /* Favoritos */
 async function getFav() {

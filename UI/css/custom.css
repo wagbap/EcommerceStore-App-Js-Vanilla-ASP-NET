@@ -502,6 +502,7 @@ body {
   height: 30px;
   border-radius: 10px;
   text-align: center;
+  padding-top:7px; /* adiciona 7px de acolchoamento na parte superior e inferior */
 }
 
 /* The popup form - hidden by default */
