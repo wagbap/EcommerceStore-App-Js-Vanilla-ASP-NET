@@ -305,6 +305,13 @@ let subTotal = document.getElementById('subTotal');
 let IVA = document.getElementById('iva');
 let Disconto = document.getElementById('discount');
 
+function calculateTotalWithDiscountAndIVA(itemPrice, quantity, discountPercentage) {
+  let totalItemPrice = itemPrice * quantity;
+  let discount = discountPercentage ? totalItemPrice * parseFloat(discountPercentage / 100) : 0; 
+  let iva = totalItemPrice * 0.03;
+  return totalItemPrice - discount - iva;
+}
+
 
 async function printCart() {
   const cartItems = await getCart();
@@ -324,17 +331,17 @@ async function printCart() {
   let allData = await getData();
 
   let cartItem = "";
- let totalPrice = 0;
-let totalWithDiscount = 0;
-let ivaTotal = 0;  // Change variable name to ivaTotal
-let discountTotal = 0;  // Change variable name to discountTotal
+  let totalPrice = 0;
+  let totalWithDiscount = 0;
+  let ivaTotal = 0;  // Change variable name to ivaTotal
+  let discountTotal = 0;  // Change variable name to discountTotal
 
-for (let i = 0; i < cartData.length; i++) {
-  let cart = cartData[i];
-  let matchingData = allData.find(data => data.ISBN === cart.ISBN);
+  for (let i = 0; i < cartData.length; i++) {
+    let cart = cartData[i];
+    let matchingData = allData.find(data => data.ISBN === cart.ISBN);
 
-  if (matchingData) {
-    cartItem += `
+    if (matchingData) {
+      cartItem += `
     <tr id="${matchingData.ISBN}">
         <td><img width="80px" src="img/${matchingData.FotoCapa}" alt="Product Image" class="product-image"></td>
         <td>${matchingData.Curso}</td>
@@ -347,39 +354,44 @@ for (let i = 0; i < cartData.length; i++) {
         <td><a onclick="removellFromCart(${matchingData.ISBN})" class="remove-product">Remove</a></td>
     </tr>
     `;
-    let totalItemPrice = matchingData.Preço * parseInt(cart.Quantidade, 10);  // Calculate total item price here, convert quantity to integer
-    let discount = matchingData.Percentagem ? totalItemPrice * parseFloat(matchingData.Percentagem / 100) : 0;  // Convert discount to number
-    let iva = totalItemPrice * 0.03;  // Calculate IVA here      
-    totalPrice += totalItemPrice;
-    totalWithDiscount += totalItemPrice - discount - iva;
-    ivaTotal += iva;  // Accumulate iva for each item
-    discountTotal += discount;  // Accumulate discount for each item
+      let totalItemPrice = matchingData.Preço * parseInt(cart.Quantidade, 10);  // Calculate total item price here, convert quantity to integer
+      let discount = matchingData.Percentagem ? totalItemPrice * parseFloat(matchingData.Percentagem / 100) : 0;  // Convert discount to number
+      let iva = totalItemPrice * 0.03;  // Calculate IVA here      
+      totalPrice += totalItemPrice;
+      totalWithDiscount += totalItemPrice - discount + iva;
+      ivaTotal += iva;  // Accumulate iva for each item
+      discountTotal += discount;  // Accumulate discount for each item
+    }
   }
+
+  carDiv.innerHTML += cartItem;
+  total.innerText = totalPrice.toFixed(2);
+  subTotal.innerText = totalWithDiscount.toFixed(2);
+  IVA.innerText = "+" + ivaTotal.toFixed(2);
+  Disconto.innerText = "-" + discountTotal.toFixed(2);
+
 }
-
-carDiv.innerHTML += cartItem;
-total.innerText = totalPrice.toFixed(2);
-subTotal.innerText = totalWithDiscount.toFixed(2);
-IVA.innerText = "-" + ivaTotal.toFixed(2);
-Disconto.innerText = "-" + discountTotal.toFixed(2);
- 
-}
-
-
 
 
 async function addToCart(isbn, tipo = null) {
   let cart = await getCart();
   let matchingCartIndex = cart.findIndex((cartItem) => cartItem.ISBN === isbn);
+  let allData = await getData();
   let gUser = getUserId();
   if (gUser === -1) { alert("Não está logado"); return; }
-  //Código a seguir só será executado se o usuário estiver logado
+  
+  let matchingProduct = allData.find((data) => data.ISBN === isbn); // Busque os detalhes do produto no banco de dados
+  
+  if(!matchingProduct) {
+    alert("Produto não encontrado");
+    return;
+  }
 
   let cartItem = {
     UserID: gUser.toString(),
     ISBN: isbn.toString(),
-    Quantidade: 1, // Define o valor padrão da quantidade como 1
-    Total: 0
+    Quantidade: 1, 
+    Total: matchingProduct.Preço 
   };
 
   if (matchingCartIndex !== -1) {
@@ -393,17 +405,14 @@ async function addToCart(isbn, tipo = null) {
       removellFromCart(isbn);
     }
   } else {
-    // O item não existe no carrinho, adicione-o com quantidade 1
     cart.push(cartItem);
   }
 
+
   await postAPI("SetCarinho", cartItem);
 
-  // Atualize a exibição do carrinho
   printCart();
 }
-
-
 
 
 async function removellFromCart(isbn) {
@@ -416,7 +425,7 @@ async function removellFromCart(isbn) {
     UserID: gUser.toString(),
     ISBN: isbn.toString(),
     Quantidade: 0, // Define o valor padrão da quantidade como 1
-    Total: 1450
+    Total: 0
   };
   if (matchingCartIndex !== -1) {
     // O item já existe no carrinho

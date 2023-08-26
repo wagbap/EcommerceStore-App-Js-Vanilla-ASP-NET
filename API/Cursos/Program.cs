@@ -30,7 +30,15 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
         });
 });
-// Adicione os serviços ao contêiner.
+
+/*JSON Serializer
+services.AddControllersWithViews().AddNewtonsoftJson(options =>
+options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+    .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver
+    = new DefaultContractResolver()); 
+
+services.AddControllers();
+// Adicione os serviços ao contêiner.*/
 
 var app = builder.Build();
 app.UseCors("MyCorsProfile");
@@ -67,7 +75,7 @@ app.MapPost("/Cursos", () =>
 
     try
     {
-        bool isDataLoaded = readBD.GetCourses(ref cursoDS); // Carregar os dados no DataSet
+        bool isDataLoaded = readBD.GetCursos(ref cursoDS); // Carregar os dados no DataSet
         if (!isDataLoaded)
         {
             return null;
